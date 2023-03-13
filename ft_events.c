@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/13 12:23:45 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:06:03 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,22 @@ void	draw_ray(t_game *game, double angle)
 	}
 }
 
-void	ft_move(int i, int x, int y, t_game *game)
+void ft_move(int i, int x, int y, t_game *game)
 {
-    (void)i;
-    game->xc = x;
-    game->yc = y;
-    fill_map(game);
-	draw_pixel(game);
-	draw_ray(game, game->angle);
-	draw_ray(game, game->angle + (FOV / 2));
-	draw_ray(game, game->angle - (FOV / 2));
+    int j;
+
+    i = y / 25;
+    j = x / 25;
+    if (game->map[i][j] == '0')
+    {
+        game->xc = x;
+        game->yc = y;
+        fill_map(game);
+        draw_pixel(game);
+        draw_ray(game, game->angle);
+        draw_ray(game, game->angle + (FOV / 2));
+        draw_ray(game, game->angle - (FOV / 2));
+    }
 }
 
 void	rotate_right(t_game *game)
