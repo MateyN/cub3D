@@ -1,32 +1,37 @@
-NAME = cub3d
 
-SRC =  main.c \
+SRCS    = main.c ft_free_ptr.c ft_game.c ft_events.c
 
-OBJ = main.o\
+NAME    = cub3D
 
-CC = gcc -O3
+LBFT	= libft/libft.a
 
-$(NAME): $(OBJ)
-		@date
-		@${MAKE} -C mlx 2>.null
-		@$(CC) $(CFLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJ)
-		@echo "\n-------COMPILED SUCCESSFULLY------"
+CC		= cc -g
+
+CFLAGS  = -Wall -Wextra -Werror #-fsanitize=address
+
+MX		= -lmlx -framework OpenGL -framework Appkit
+
+MAKEC	= make clean
+
+MAKEF	= make fclean
+
+OBJS 	= ${SRCS:.c=.o}
 
 all: $(NAME)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -Imlx -c $^ -o $@
+$(NAME): ${OBJS}
+	@$(MAKE) -C libft
+	@$(CC) $(CFLAGS) $(MX) ${LBFT} ${OBJS} -o ${NAME}
 
 clean:
-	@/bin/rm -rf $(OBJ)
-	@/bin/rm -rf .null
-	@${MAKE} -C mlx clean
-	@echo "---------CLEAN  DONE----------"
+	@$(MAKEC) -C libft
+	@${RM} ${OBJS}
 
 fclean: clean
-	@/bin/rm -rf $(NAME)
-	@echo "---------FCLEAN  DONE---------"
+	@$(MAKEF) -C libft
+	@${RM} ${NAME}
 
 re: fclean all
+	@$(MAKER) -C libft
 
 .PHONY: all clean fclean re

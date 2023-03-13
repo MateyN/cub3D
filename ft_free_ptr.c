@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_free_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 11:13:45 by mnikolov          #+#    #+#             */
-/*   Updated: 2022/03/24 18:55:33 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/03/13 11:03:42 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/03/13 11:03:43 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-int	ft_atoi(const char *str)
-
+void	ft_free_ptr(char **ptr)
 {
-	int				i;
-	long long int	n;
-	int				sign;
+	int	i;
 
 	i = 0;
-	n = 0;
-	sign = 1;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (ptr[i])
 	{
-		if (str[i] == '-')
-			sign = -1;
+		free(ptr[i]);
 		i++;
 	}
-	while (ft_isdigit(str[i]))
-	{
-		n = n * 10 + str[i] - '0';
-		i++;
-	}
-	return (n * sign);
+	free(ptr);
 }
