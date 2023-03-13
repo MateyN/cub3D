@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/13 12:23:43 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:17:48 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_game
 	int		map_size_x;
 	int		map_size_y;
 	double	angle;
+	int		win_width;
 }				t_game;
 
 typedef struct s_ray

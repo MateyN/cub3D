@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/13 13:06:03 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:11:23 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ void ft_move(int i, int x, int y, t_game *game)
         game->yc = y;
         fill_map(game);
         draw_pixel(game);
-        draw_ray(game, game->angle);
-        draw_ray(game, game->angle + (FOV / 2));
-        draw_ray(game, game->angle - (FOV / 2));
+        double angle = game->angle - (FOV / 2);
+        for (int i = 0; i < 400; i++)
+        {
+            draw_ray(game, angle);
+            angle += FOV / 400;
+        }
     }
 }
 
@@ -58,9 +61,12 @@ void	rotate_right(t_game *game)
 	game->angle += 0.3;
     fill_map(game);
 	draw_pixel(game);
-	draw_ray(game, game->angle);
-	draw_ray(game, game->angle + (FOV / 2));
-	draw_ray(game, game->angle - (FOV / 2));
+    double angle = game->angle - (FOV / 2);
+    for (int i = 0; i < 400; i++)
+    {
+        draw_ray(game, angle);
+        angle += FOV / 400;
+    }
 }
 
 void	rotate_left(t_game *game)
@@ -68,9 +74,12 @@ void	rotate_left(t_game *game)
 	game->angle -= 0.3;
     fill_map(game);
 	draw_pixel(game);
-	draw_ray(game, game->angle);
-	draw_ray(game, game->angle + (FOV / 2));
-	draw_ray(game, game->angle - (FOV / 2));
+    double angle = game->angle - (FOV / 2);
+    for (int i = 0; i < 400; i++)
+    {
+        draw_ray(game, angle);
+        angle += FOV / 400;
+    }
 
 }
 
