@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/13 13:17:48 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:32:00 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <mlx.h>
 # include <math.h>
 
+# define FOV 1.04719755 // 60 degree
+# define RIGHT 124
+# define LEFT 123
+
 typedef struct s_game
 {
 	char	**map;
@@ -29,6 +33,12 @@ typedef struct s_game
 	void	*floor;
 	int		xc;
 	int		yc;
+	int		a;
+	int		s;
+	int		w;
+	int		d;
+	int		left;
+	int		right;
 	int		map_size_x;
 	int		map_size_y;
 	double	angle;

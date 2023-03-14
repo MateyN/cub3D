@@ -1,4 +1,3 @@
-
 SRCS    = main.c ft_free_ptr.c ft_game.c ft_events.c
 
 NAME    = cub3D
@@ -32,6 +31,6 @@ fclean: clean
 	@${RM} ${NAME}
 
 re: fclean all
-	@$(MAKER) -C libft
+	@$(MAKE) -s -C libft
 
 .PHONY: all clean fclean re

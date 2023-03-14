@@ -6,16 +6,11 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/13 14:11:23 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:16:53 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-# define FOV 1.04719755 // 60 degree
-# define RIGHT 124
-# define LEFT 123
-
 
 void	draw_ray(t_game *game, double angle)
 {
@@ -24,9 +19,9 @@ void	draw_ray(t_game *game, double angle)
 	int i = 0;
 	while (i < 400)
 	{
-		mlx_pixel_put(game->mlx, game->win, (int)x, (int)y, 0xffffff);
-		x += cos(angle);
-		y += sin(angle);
+		mlx_pixel_put(game->mlx, game->win, (int)x, (int)y, 0xFFFF00);
+		x += cos(angle) * 3;
+		y += sin(angle) * 3;
 		int index_i = y / 25;
 		int index_j = x / 25;
 		if (game->map[index_i][index_j] == '1')
@@ -34,6 +29,7 @@ void	draw_ray(t_game *game, double angle)
 		i++;
 	}
 }
+
 
 void ft_move(int i, int x, int y, t_game *game)
 {
