@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/13 14:32:00 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:58:16 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 # define FOV 1.04719755 // 60 degree
 # define RIGHT 124
 # define LEFT 123
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_ESC 53
 
 typedef struct s_game
 {
@@ -33,12 +38,6 @@ typedef struct s_game
 	void	*floor;
 	int		xc;
 	int		yc;
-	int		a;
-	int		s;
-	int		w;
-	int		d;
-	int		left;
-	int		right;
 	int		map_size_x;
 	int		map_size_y;
 	double	angle;

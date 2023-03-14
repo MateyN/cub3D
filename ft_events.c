@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/14 10:16:53 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:58:34 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void	rotate_left(t_game *game)
 
 int	ft_events(int keycode, t_game *game)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 		exit(EXIT_SUCCESS);
-	if (keycode == 13)
+	if (keycode == KEY_W)
 		ft_move(0, game->xc + (10 * cos(game->angle)), game->yc + (10 * sin(game->angle)), game);
-	if (keycode == 1)
+	if (keycode == KEY_S)
 		ft_move(1, game->xc - (10 * cos(game->angle)), game->yc - (10 * sin(game->angle)), game);
-	if (keycode == 2)
+	if (keycode == KEY_D)
 		ft_move(2, game->xc + (10 * cos(game->angle)), game->yc, game);
 	if (keycode == 0)
 		ft_move(3, game->xc - (10 * cos(game->angle)), game->yc, game);
