@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/14 12:58:34 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:00:58 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	draw_ray(t_game *game, double angle)
 		i++;
 	}
 }
-
 
 void ft_move(int i, int x, int y, t_game *game)
 {
@@ -89,7 +88,7 @@ int	ft_events(int keycode, t_game *game)
 		ft_move(1, game->xc - (10 * cos(game->angle)), game->yc - (10 * sin(game->angle)), game);
 	if (keycode == KEY_D)
 		ft_move(2, game->xc + (10 * cos(game->angle)), game->yc, game);
-	if (keycode == 0)
+	if (keycode == KEY_A)
 		ft_move(3, game->xc - (10 * cos(game->angle)), game->yc, game);
 	if (keycode == RIGHT)
 		rotate_right(game);
