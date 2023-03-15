@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/15 13:48:40 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/15 14:34:07 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char	*ft_strchr(const char *s, int c);
 
 int     ft_events(int keycode, t_game *game);
 int		ft_key_release(int keycode, t_game *game);
+void 	ft_move(int i, int x, int y, t_game *game);
 size_t	ft_strlen(const char *s);
 
 void	read_img(t_game *game);

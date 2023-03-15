@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/15 13:54:20 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/15 14:37:36 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void ft_move(int i, int x, int y, t_game *game)
     double fov = FOV;
     double distperray = fov / (25 * game->map_size_x); // calculate the angular distance between each ray that is cast from the player's position.
     (void)i;
-	if (game->map[(y + 3) / 25][(x + 3) / 25] == '1'
-        || game->map[(y - 3) / 25][(x - 3) / 25] == '1')
+    if (game->map[y / 25][x / 25] == '1') // check the exact cell that the player is in
         return ;
     game->xc = x;
     game->yc = y;
