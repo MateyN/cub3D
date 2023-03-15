@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/15 11:56:09 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:15:42 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,12 @@ void draw_pixel(t_game *game)
     x = 0; // x-coordinate of the current pixel being drown
     y = radius; // y-coordinate of the current pixel being drown
     decision = 3 - (2 * radius); // decision parameter for Bresenham's algorithm
-
     // draw the first point at the top of the triangle
     draw_triangle(game, x, y);
-
     // loop through all the pixels in the circle until x is greater than y
     while (y >= x)
     {
-        x++; // increment x
-
+        x++;
         // check if the decision parameter is greater than zero
         // if it is, decrement y and update the decision parameter
         if (decision > 0)
@@ -75,10 +72,8 @@ void draw_pixel(t_game *game)
             y--;
             decision += 4 * (x - y) + 10;
         }
-        // if the decision parameter is not greater than zero, update it using the simpler formula
         else
             decision += 4 * x + 6;
-
         // draw the pixel at the current x,y coordinates
         draw_triangle(game, x, y);
     }
