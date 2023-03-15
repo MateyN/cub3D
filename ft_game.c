@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/14 12:59:03 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:56:09 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	ft_game(t_game *game)
 	read_img(game);
 	fill_map(game);
 	draw_pixel(game);
-	mlx_key_hook(game->win, ft_events, game);
+	mlx_hook(game->win, 2, 1L << 0, ft_events, game);
+	mlx_hook(game->win, 3, 1L << 1, ft_key_release, game);
 	mlx_loop(game->mlx);
 }

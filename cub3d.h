@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/14 14:01:15 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:56:04 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <math.h>
+# include <mach/mach_time.h>
 
 # define FOV 1.04719755 // 60 degree
 # define RIGHT 124
@@ -28,6 +29,7 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ESC 53
+# define PI 3.14159265359
 
 typedef struct s_game
 {
@@ -38,9 +40,16 @@ typedef struct s_game
 	void	*floor;
 	int		xc;
 	int		yc;
+	double 	max_distance;
 	int		map_size_x;
 	int		map_size_y;
 	double	angle;
+	int		move_forward;
+    int		move_backward;
+    int		move_left;
+    int		move_right;
+	int		rotate_left;
+	int		rotate_right;
 	int		win_width;
 }				t_game;
 
@@ -65,6 +74,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(const char *s, int c);
 
 int     ft_events(int keycode, t_game *game);
+int		ft_key_release(int keycode, t_game *game);
 size_t	ft_strlen(const char *s);
 
 void	read_img(t_game *game);
