@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/15 14:33:43 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:50:13 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ void	read_img(t_game *game)
 {
 	int	width;
 	int	height;
-
+    
 	game->floor = mlx_xpm_file_to_image(game->mlx, "./assets/white.xpm", &width, &height);
 	game->wall = mlx_xpm_file_to_image(game->mlx, "./assets/square.xpm", &width, &height);
 }
 
-void draw_triangle(t_game *game, int x, int y)
+void draw_player(t_game *game, int x, int y)
 {
     mlx_pixel_put(game->mlx, game->win, game->xc + x, game->yc + y, 0xFFFF00);
     mlx_pixel_put(game->mlx, game->win, game->xc - x, game->yc + y, 0xFFFF00);
+    mlx_pixel_put(game->mlx, game->win, game->xc + y, game->yc - x, 0xFFFF00);
     mlx_pixel_put(game->mlx, game->win, game->xc + y, game->yc - x, 0xFFFF00);
 }
 
@@ -60,7 +61,7 @@ void draw_pixel(t_game *game)
     y = radius; // y-coordinate of the current pixel being drown
     decision = 3 - (2 * radius); // decision parameter for Bresenham's algorithm
     // draw the first point at the top of the triangle
-    draw_triangle(game, x, y);
+    draw_player(game, x, y);
     // loop through all the pixels in the circle until x is greater than y
     while (y >= x)
     {
@@ -75,8 +76,22 @@ void draw_pixel(t_game *game)
         else
             decision += 4 * x + 6;
         // draw the pixel at the current x,y coordinates
-        draw_triangle(game, x, y);
+        draw_player(game, x, y);
     }
+}
+
+void	draw(t_game *game, int x, int y, int color)
+{
+    char *dst;
+
+    dst = game->buf.addr + (y * game->buf.line_length + x *
+        (game->buf.bits_per_pixel / 8));
+    *(unsigned int*)dst = color;
+}
+
+void	render(t_game *game)
+{
+    mlx_put_image_to_window(game->mlx, game->win, game->buf.img, 0, 0);
 }
 
 void	ft_game(t_game *game)
@@ -92,6 +107,7 @@ void	ft_game(t_game *game)
 	read_img(game);
 	fill_map(game);
 	draw_pixel(game);
+	render(game);
 	mlx_hook(game->win, 2, 1L << 0, ft_events, game);
 	mlx_hook(game->win, 3, 1L << 1, ft_key_release, game);
 	mlx_loop(game->mlx);

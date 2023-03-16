@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/15 14:34:07 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:45:28 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@
 # define KEY_ESC 53
 # define PI 3.14159265359
 
+typedef struct	s_buffer
+{
+    void		*img;
+    char		*addr;
+    int			bits_per_pixel;
+    int			line_length;
+    int			endian;
+}				t_buffer;
+
 typedef struct s_game
 {
 	char	**map;
@@ -38,6 +47,7 @@ typedef struct s_game
 	void	*win;
 	void	*wall;
 	void	*floor;
+	void	*player;
 	int		xc;
 	int		yc;
 	double 	max_distance;
@@ -51,6 +61,8 @@ typedef struct s_game
 	int		rotate_left;
 	int		rotate_right;
 	int		win_width;
+	int		win_height;
+	t_buffer	buf;
 }				t_game;
 
 typedef struct s_ray
@@ -66,6 +78,7 @@ void	ft_free_ptr(char **ptr);
 void	ft_game(t_game *game);
 void	fill_map(t_game *game);
 void	draw_pixel(t_game *game);
+void	draw(t_game *game, int x, int y, int color);
 
 void	*ft_calloc(size_t count, size_t size);
 char	**ft_split(char const *s, char c);
@@ -76,6 +89,7 @@ char	*ft_strchr(const char *s, int c);
 int     ft_events(int keycode, t_game *game);
 int		ft_key_release(int keycode, t_game *game);
 void 	ft_move(int i, int x, int y, t_game *game);
+void	draw_rays(t_game *game);
 size_t	ft_strlen(const char *s);
 
 void	read_img(t_game *game);

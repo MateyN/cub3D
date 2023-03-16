@@ -6,11 +6,18 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/15 14:37:36 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:45:14 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_buffer(t_game *game)
+{
+    game->buf.img = mlx_new_image(game->mlx, game->win_width, game->win_height);
+    game->buf.addr = mlx_get_data_addr(game->buf.img, &game->buf.bits_per_pixel,
+                                    &game->buf.line_length, &game->buf.endian);
+}
 
 void	draw_ray(t_game *game, double angle)
 {
@@ -22,8 +29,8 @@ void	draw_ray(t_game *game, double angle)
     while (1)
     {
         mlx_pixel_put(game->mlx, game->win, (int)x, (int)y, 0xFFFF00);
-        x += cos(angle) * 2;
-        y += sin(angle) * 2;
+        x += cos(angle) * 10;
+        y += sin(angle) * 10;
         int i;
         int j;
 		i = y / 25;
@@ -33,24 +40,31 @@ void	draw_ray(t_game *game, double angle)
     }
 }
 
-void ft_move(int i, int x, int y, t_game *game)
+void	draw_rays(t_game *game)
 {
-    double fov = FOV;
-    double distperray = fov / (25 * game->map_size_x); // calculate the angular distance between each ray that is cast from the player's position.
-    (void)i;
-    if (game->map[y / 25][x / 25] == '1') // check the exact cell that the player is in
-        return ;
-    game->xc = x;
-    game->yc = y;
-    fill_map(game);
-    draw_pixel(game);
-    draw_ray(game, game->angle);
+    double fov;
+    double distperray; // calculate the angular distance between each ray that is cast from the player's position.
+
+	fov = FOV;
+	distperray = fov / (25 * game->map_size_x);
     while (fov / 2 > 0)
     {
         draw_ray(game, game->angle + (fov / 2));
         draw_ray(game, game->angle - (fov / 2));
         fov -= distperray;
     }
+}
+
+void ft_move(int i, int x, int y, t_game *game)
+{
+	(void)i;
+    if (game->map[y / 25][x / 25] == '1') // check the exact cell that the player is in
+        return ;
+    game->xc = x;
+    game->yc = y;
+    mlx_clear_window(game->mlx, game->win); // clear the window before re-drawing
+    fill_map(game); // draw the map only once
+    draw_rays(game); // cast all rays asynchronously
 }
 
 void rotate_right(t_game *game)
