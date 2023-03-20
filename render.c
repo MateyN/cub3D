@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 10:31:19 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:40:00 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:50:01 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,18 @@ void	read_img(t_game *game)
 	int	height;
     
 	game->wall = mlx_xpm_file_to_image(game->mlx, "./assets/wall32x32.xpm", &width, &height);
+	//if (game->wall == NULL)
+	//{
+	//	printf("Error: Failed to load wall image\n");
+	//	exit(0);
+	//}
+
 	game->floor = mlx_xpm_file_to_image(game->mlx, "./assets/square.xpm", &width, &height);
+	//if (game->floor == NULL)
+	//{
+	//	printf("Error: Failed to load floor image\n");
+	//	exit(0);
+	//}
 }
 
 void    my_mlx_put_image_to_window(t_game *game, int x, int y, int color)
