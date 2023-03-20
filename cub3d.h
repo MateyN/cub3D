@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:20:16 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:55:22 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define KeyPress 2
 # define KeyRelease 3
 # define MOVESPEED 1
-# define ROTSPEED 0.1
+# define ROTSPEED 0.05
 # define MAPHEIGHT 25
 # define MAPWIDTH 25
 
