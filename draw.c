@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:06:54 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 12:54:33 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:59:48 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void    draw_player(t_game *game)
         j = 0;
         while (j <= 1)
         {
-            my_mlx_pixel_put(game, game->xc + j, game->yc + i, 0xFFFF00);
-            my_mlx_pixel_put(game, game->xc - j, game->yc + i, 0xFFFF00);
-            my_mlx_pixel_put(game, game->xc + j, game->yc - i, 0xFFFF00);
-            my_mlx_pixel_put(game, game->xc - j, game->yc - i, 0xFFFF00);
+            my_mlx_pixel_put(game, game->xc + j, game->yc + i, 0x000000);
+            my_mlx_pixel_put(game, game->xc - j, game->yc + i, 0x000000);
+            my_mlx_pixel_put(game, game->xc + j, game->yc - i, 0x000000);
+            my_mlx_pixel_put(game, game->xc - j, game->yc - i, 0x000000);
             j++;
         }
         i++;
