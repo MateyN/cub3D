@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:17:35 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:19:47 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int ft_game(t_game *game)
 {
-	rot_left_right(game);
-	right_left_movement(game);
-	forward_backward_movement(game);
-	render(game);   
-	return (0);
+    rot_left_right(game);
+    if (game->move->right || game->move->left)
+        right_left_movement(game);
+    if (game->move->forward || game->move->backward)
+        forward_backward_movement(game);
+    render(game);   
+    return (0);
 }
 
 void    ft_cub3d(t_game *game, char **map)

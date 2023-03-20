@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:06:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:58:55 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:35:34 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,19 @@ void    draw_rays(t_game *game)
 {
     double fov;
     double distperray;
+    //double ray_angle;
+    //int i;
 
+    //i = 0;
+    //ray_angle = game->angle - (fov / 2);
     fov = FOV;
     distperray = fov / (MAPWIDTH * game->map_size_x);
+    //while (i < MAPWIDTH)
     while (fov / 2 > 0)
     {
+        //ray_angle = atan2(i - MAPWIDTH / 2, MAPWIDTH / 2 / tan(fov / 2));
+        //draw_ray(game, ray_angle);
+        //i++;
         draw_ray(game, game->angle + (fov / 2));
         draw_ray(game, game->angle - (fov / 2));
         fov -= distperray;

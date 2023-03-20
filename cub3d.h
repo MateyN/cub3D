@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:55:22 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:33:01 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <math.h>
-# include <mach/mach_time.h>
 
 # define FOV 1.04719755 // 60 degree
 # define RIGHT 124
