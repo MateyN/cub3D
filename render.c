@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 10:31:19 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:07:40 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:40:00 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {
-    char    *dst;
+    char    *dist;
     int     bits_per_pixel;
     int     size_line;
     int     endian;
 
-    dst = mlx_get_data_addr(game->img, &bits_per_pixel, &size_line, &endian);
+    dist = mlx_get_data_addr(game->img, &bits_per_pixel, &size_line, &endian);
     if (x >= 0 && x < game->map_size_x * MAPWIDTH && y >= 0 && y < game->map_size_y * MAPHEIGHT)
     {
         int offset = y * size_line + x * (bits_per_pixel / 8);
-        *(unsigned int*)(dst + offset) = color;
+        *(unsigned int*)(dist + offset) = color;
     }
 }
 

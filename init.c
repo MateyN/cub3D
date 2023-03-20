@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 10:12:58 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:13:49 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:34:47 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void    init_game(t_game *game, char **map, t_move *move)
     read_img(game);
     game->xc = (game->map_size_x * MAPWIDTH) / 2;
     game->yc = (game->map_size_y * MAPHEIGHT) / 2;
-    game->angle = M_PI_2;
+    game->angle = PI / 2;
     game->move = move;
 }
