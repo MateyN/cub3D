@@ -6,125 +6,104 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/16 12:45:14 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:45:41 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_buffer(t_game *game)
+void	rot_left_right(t_game *game)
 {
-    game->buf.img = mlx_new_image(game->mlx, game->win_width, game->win_height);
-    game->buf.addr = mlx_get_data_addr(game->buf.img, &game->buf.bits_per_pixel,
-                                    &game->buf.line_length, &game->buf.endian);
+	if (game->move->rotright == 1)
+		game->angle += ROTSPEED;
+	if (game->move->rotleft == 1)
+		game->angle -= ROTSPEED;
 }
 
-void	draw_ray(t_game *game, double angle)
+void    right_left_movement(t_game *game)
 {
-    double x;
-    double y;
+    double tmp_x;
+    double tmp_y;
 
-	x = game->xc;
-	y = game->yc;
-    while (1)
+    tmp_x = game->xc;
+    tmp_y = game->yc;
+    if (game->move->right == 1)
     {
-        mlx_pixel_put(game->mlx, game->win, (int)x, (int)y, 0xFFFF00);
-        x += cos(angle) * 10;
-        y += sin(angle) * 10;
-        int i;
-        int j;
-		i = y / 25;
-		j = x / 25;
-        if (game->map[i][j] == '1')
-            break ;
+        game->xc -= MOVESPEED * sin(game->angle);
+        game->yc += MOVESPEED * cos(game->angle);
+    }
+    if (game->move->left == 1)
+    {
+        game->xc += MOVESPEED * sin(game->angle);
+        game->yc -= MOVESPEED * cos(game->angle);
+    }
+    if (game->map[(int)((game->yc + 3) / MAPHEIGHT)][(int)((game->xc + 3) / MAPWIDTH)] == '1'
+        || game->map[(int)((game->yc - 3) / MAPHEIGHT)][(int)((game->xc - 3) / MAPWIDTH)] == '1')
+    {
+        game->xc = tmp_x;
+        game->yc = tmp_y;
     }
 }
 
-void	draw_rays(t_game *game)
+void    forward_backward_movement(t_game *game)
 {
-    double fov;
-    double distperray; // calculate the angular distance between each ray that is cast from the player's position.
+    double tmp_x;
+    double tmp_y;
 
-	fov = FOV;
-	distperray = fov / (25 * game->map_size_x);
-    while (fov / 2 > 0)
+    tmp_x = game->xc;
+    tmp_y = game->yc;
+    if (game->move->forward == 1)
     {
-        draw_ray(game, game->angle + (fov / 2));
-        draw_ray(game, game->angle - (fov / 2));
-        fov -= distperray;
+        game->xc += MOVESPEED * cos(game->angle);
+        game->yc += MOVESPEED * sin(game->angle);
+    }
+    if (game->move->left == 1)
+    {
+        game->xc -= MOVESPEED * cos(game->angle);
+        game->yc -= MOVESPEED * sin(game->angle);
+    }
+    if (game->map[(int)((game->yc + 3) / MAPHEIGHT)][(int)((game->xc + 3) / MAPWIDTH)] == '1'
+        || game->map[(int)((game->yc - 3) / MAPHEIGHT)][(int)((game->xc - 3) / MAPWIDTH)] == '1')
+    {
+        game->xc = tmp_x;
+        game->yc = tmp_y;
     }
 }
 
-void ft_move(int i, int x, int y, t_game *game)
+int ft_press_key(int keycode, t_move *move)
 {
-	(void)i;
-    if (game->map[y / 25][x / 25] == '1') // check the exact cell that the player is in
-        return ;
-    game->xc = x;
-    game->yc = y;
-    mlx_clear_window(game->mlx, game->win); // clear the window before re-drawing
-    fill_map(game); // draw the map only once
-    draw_rays(game); // cast all rays asynchronously
+	if (keycode == KEY_ESC)
+		exit(EXIT_SUCCESS);
+	if (keycode == KEY_W)
+		move->forward = 1;
+	if (keycode == KEY_S)
+		move->backward = 1;
+	if (keycode == KEY_D)
+		move->right = 1;
+	if (keycode == KEY_A)
+		move->left = 1;
+	if (keycode == RIGHT)
+		move->rotright = 1;
+	if (keycode == LEFT)
+        move->rotleft = 1;
+	return (0);
 }
 
-void rotate_right(t_game *game)
+int ft_release_key(int keycode, t_move *move)
 {
-    game->angle += (PI / 180) * 18; // rotate by 18 degrees
-    fill_map(game);
-    draw_pixel(game);
-    double angle = game->angle - (FOV / 2);
-    for (int i = 0; i < 400; i++)
-    {
-        draw_ray(game, angle);
-        angle += FOV / 400;
-    }
-}
-
-void rotate_left(t_game *game)
-{
-    game->angle -= (PI / 180) * 18; // rotate by 18 degrees
-    fill_map(game);
-    draw_pixel(game);
-    double angle = game->angle - (FOV / 2);
-    for (int i = 0; i < 400; i++)
-    {
-        draw_ray(game, angle);
-        angle += FOV / 400;
-    }
-}
-
-int ft_events(int keycode, t_game *game)
-{
-    if (keycode == KEY_ESC)
-        exit(EXIT_SUCCESS);
-    if (keycode == KEY_W)
-        ft_move(0, game->xc + (10 * cos(game->angle)), game->yc + (10 * sin(game->angle)), game);
-    if (keycode == KEY_S)
-        ft_move(1, game->xc - (10 * cos(game->angle)), game->yc - (10 * sin(game->angle)), game);
-    if (keycode == KEY_A)
-        ft_move(2, game->xc - (10 * sin(game->angle)), game->yc + (10 * cos(game->angle)), game);
-    if (keycode == KEY_D)
-        ft_move(3, game->xc + (10 * sin(game->angle)), game->yc - (10 * cos(game->angle)), game);
-    if (keycode == RIGHT)
-        rotate_right(game);
-    if (keycode == LEFT)
-        rotate_left(game);
-    return (0);
-}
-
-int ft_key_release(int keycode, t_game *game)
-{
-    if (keycode == KEY_W)
-        game->move_forward = 0;
-    if (keycode == KEY_S)
-        game->move_backward = 0;
-    if (keycode == KEY_A)
-        game->move_left = 0;
-    if (keycode == KEY_D)
-        game->move_right = 0;
-    if (keycode == RIGHT)
-        game->rotate_right = 0;
-    if (keycode == LEFT)
-        game->rotate_left = 0;
-    return (0);
+	if (keycode == KEY_ESC)
+		exit(EXIT_SUCCESS);
+	if (keycode == KEY_W)
+		move->forward = 0;
+	if (keycode == KEY_S)
+		move->backward = 0;
+	if (keycode == KEY_D)
+		move->right = 0;
+	if (keycode == KEY_A)
+		move->left = 0;
+	if (keycode == RIGHT)
+		move->rotright = 0;
+	if (keycode == LEFT)
+        move->rotleft = 0;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/14 14:01:20 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:17:41 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ char	**ft_add_map(int fd)
 
 int	main(int ac, char **av)
 {
-	t_game	game;
-	int		fd;
+	char **map;
+	t_game game;
+	int	fd;
 
-	game.angle = M_PI_2;
 	(void)ac;
+	game.angle = M_PI_2;
 	fd = open(av[1], O_RDONLY);
-	game.map = ft_add_map(fd);
-	close(fd);
-	ft_game(&game);
+	map = ft_add_map(fd);
+	ft_cub3d(&game, map);
 	return (0);
 }

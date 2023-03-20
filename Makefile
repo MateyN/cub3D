@@ -1,4 +1,4 @@
-SRCS    = main.c ft_free_ptr.c ft_game.c ft_events.c
+SRCS    = main.c ft_free_ptr.c ft_game.c ft_events.c init.c render.c draw.c raycasting.c
 
 NAME    = cub3D
 

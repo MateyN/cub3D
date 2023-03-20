@@ -6,109 +6,29 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/16 12:50:13 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:17:35 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fill_map(t_game *game)
+int ft_game(t_game *game)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map[i])
-	{
-		j = 0;
-		while (game->map[i][j])
-		{
-			mlx_put_image_to_window(game->mlx, game->win, game->wall, j * 25, i * 25);
-			if (game->map[i][j] == '1')
-				mlx_put_image_to_window (game->mlx, game->win, game->floor, j * 25, i * 25);
-			j++;
-		}
-		i++;
-	}
+	rot_left_right(game);
+	right_left_movement(game);
+	forward_backward_movement(game);
+	render(game);   
+	return (0);
 }
 
-void	read_img(t_game *game)
+void    ft_cub3d(t_game *game, char **map)
 {
-	int	width;
-	int	height;
-    
-	game->floor = mlx_xpm_file_to_image(game->mlx, "./assets/white.xpm", &width, &height);
-	game->wall = mlx_xpm_file_to_image(game->mlx, "./assets/square.xpm", &width, &height);
-}
+    t_move  move;
 
-void draw_player(t_game *game, int x, int y)
-{
-    mlx_pixel_put(game->mlx, game->win, game->xc + x, game->yc + y, 0xFFFF00);
-    mlx_pixel_put(game->mlx, game->win, game->xc - x, game->yc + y, 0xFFFF00);
-    mlx_pixel_put(game->mlx, game->win, game->xc + y, game->yc - x, 0xFFFF00);
-    mlx_pixel_put(game->mlx, game->win, game->xc + y, game->yc - x, 0xFFFF00);
-}
-
-void draw_pixel(t_game *game)
-{
-    int radius;
-    int x;
-    int y;
-    int decision;
-    
-    radius = 3; // radius of the circle
-    x = 0; // x-coordinate of the current pixel being drown
-    y = radius; // y-coordinate of the current pixel being drown
-    decision = 3 - (2 * radius); // decision parameter for Bresenham's algorithm
-    // draw the first point at the top of the triangle
-    draw_player(game, x, y);
-    // loop through all the pixels in the circle until x is greater than y
-    while (y >= x)
-    {
-        x++;
-        // check if the decision parameter is greater than zero
-        // if it is, decrement y and update the decision parameter
-        if (decision > 0)
-        {
-            y--;
-            decision += 4 * (x - y) + 10;
-        }
-        else
-            decision += 4 * x + 6;
-        // draw the pixel at the current x,y coordinates
-        draw_player(game, x, y);
-    }
-}
-
-void	draw(t_game *game, int x, int y, int color)
-{
-    char *dst;
-
-    dst = game->buf.addr + (y * game->buf.line_length + x *
-        (game->buf.bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
-}
-
-void	render(t_game *game)
-{
-    mlx_put_image_to_window(game->mlx, game->win, game->buf.img, 0, 0);
-}
-
-void	ft_game(t_game *game)
-{
-	game->map_size_y = 0;
-	while (game->map[game->map_size_y])
-		game->map_size_y++;
-	game->map_size_x = ft_strlen(game->map[0]);
-	game->xc = (game->map_size_x * 25) / 2 - 20;
-	game->yc = (game->map_size_y * 25) / 2 - 10;
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->map_size_x * 25, game->map_size_y * 25, "Cub3D");
-	read_img(game);
-	fill_map(game);
-	draw_pixel(game);
-	render(game);
-	mlx_hook(game->win, 2, 1L << 0, ft_events, game);
-	mlx_hook(game->win, 3, 1L << 1, ft_key_release, game);
+    ft_init_moves(&move);
+    init_game(game, map, &move);
+    mlx_hook(game->win, KeyPress, 1L << 0, ft_press_key, &move);
+	mlx_loop_hook(game->mlx, ft_game, game);
+	mlx_hook(game->win, KeyRelease, 1L << 1, ft_release_key, &move);
 	mlx_loop(game->mlx);
 }
