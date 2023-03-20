@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:06:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 11:06:32 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:42:00 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void    draw_ray(t_game *game, double angle)
     while (1)
     {
         my_mlx_pixel_put(game, (int)x, (int)y, 0xFFFF00);
-        x += cos(angle);
-        y += sin(angle);
+        x += cos(angle) * 3;
+        y += sin(angle) * 3;
         if (game->map[(int)(y / MAPHEIGHT)][(int)(x / MAPWIDTH)] == '1')
             break;
     }

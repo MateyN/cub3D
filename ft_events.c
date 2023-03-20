@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:15 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 10:45:41 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:46:03 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void    forward_backward_movement(t_game *game)
         game->xc += MOVESPEED * cos(game->angle);
         game->yc += MOVESPEED * sin(game->angle);
     }
-    if (game->move->left == 1)
+    if (game->move->backward == 1)
     {
         game->xc -= MOVESPEED * cos(game->angle);
         game->yc -= MOVESPEED * sin(game->angle);
