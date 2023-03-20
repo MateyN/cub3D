@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 10:31:19 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 12:50:01 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:54:52 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void    my_mlx_put_image_to_window(t_game *game, int x, int y, int color)
 
 void    render(t_game *game)
 {
-    fill_map(game);
+    draw_walls(game);
     draw_rays(game);
     draw_player(game);
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
