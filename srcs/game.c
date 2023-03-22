@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_game.c                                          :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 12:19:47 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:29:47 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void    ft_cub3d(t_game *game, char **map)
 
     ft_init_moves(&move);
     init_game(game, map, &move);
-    mlx_hook(game->win, KeyPress, 1L << 0, ft_press_key, &move);
+    mlx_hook(game->win, KEYPRESS, 1L << 0, ft_press_key, &move);
 	mlx_loop_hook(game->mlx, ft_game, game);
-	mlx_hook(game->win, KeyRelease, 1L << 1, ft_release_key, &move);
+	mlx_hook(game->win, KEYRELEASE, 1L << 1, ft_release_key, &move);
 	mlx_loop(game->mlx);
 }

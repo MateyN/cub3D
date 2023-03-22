@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:06:54 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/21 14:00:38 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:08:02 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ void    draw_player(t_game *game)
     }
 }
 
-void	draw_floor(t_game *game)
+void    draw_floor(t_game *game)
 {
-	int	y;
-	int	x;
+    int y;
+    int x;
 
-	y = 0;
-	while (y < game->map_size_y * MAPHEIGHT)
-	{
-		x = 0;
-		while (x < game->map_size_x * MAPWIDTH)
-		{
+    y = 0;
+    while (y < game->map_size_y * MAPHEIGHT)
+    {
+        x = 0;
+        while (x < game->map_size_x * MAPWIDTH)
+        {
             my_mlx_pixel_put(game, (int)x, (int)y, 0x90EE90);
-			x++;
-		}
-		y++;
+		    x++;
+	    }
+	    y++;
 	}
 }
 

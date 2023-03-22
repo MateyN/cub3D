@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/21 14:02:13 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:07:01 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@
 # define KEY_D 2
 # define KEY_ESC 53
 # define PI 3.14159265359
-# define KeyPress 2
-# define KeyRelease 3
+# define KEYPRESS 2
+# define KEYRELEASE 3
 # define MOVESPEED 1
 # define ROTSPEED 0.05
 # define MAPHEIGHT 25
 # define MAPWIDTH 25
 //# define COLLISION_STEP 0.01
 
-typedef struct	s_move
+typedef struct s_move
 {
 	int	rotleft;
 	int	rotright;
@@ -60,7 +60,7 @@ typedef struct s_game
 	int		map_size_x;
 	int		map_size_y;
 	double	angle;
-	t_move		*move;
+	t_move	*move;
 }				t_game;
 
 	// FREE
@@ -68,11 +68,11 @@ void	ft_free_ptr(char **ptr);
 void	free_game(t_game *game);
 
 	// INIT
-void    init_game(t_game *game, char **map, t_move *move);
-void    ft_init_moves(t_move *move);
+void	init_game(t_game *game, char **map, t_move *move);
+void	ft_init_moves(t_move *move);
 
 	// GAME
-void    ft_cub3d(t_game *game, char **map);
+void	ft_cub3d(t_game *game, char **map);
 int		ft_game(t_game *game);
 
 	// LIBFT UTILS
@@ -87,22 +87,22 @@ size_t	ft_strlen(const char *s);
 int		ft_press_key(int keycode, t_move *move);
 int		ft_release_key(int keycode, t_move *move);
 void	rot_left_right(t_game *game);
-void    right_left_movement(t_game *game);
-void    forward_backward_movement(t_game *game);
+void	right_left_movement(t_game *game);
+void	forward_backward_movement(t_game *game);
 
 	// RAYCASTING
 void	draw_rays(t_game *game);
-void    draw_ray(t_game *game, double angle);
+void	draw_ray(t_game *game, double angle);
 
 	//DRAW
-void    draw_player(t_game *game);
+void	draw_player(t_game *game);
 void	draw_floor(t_game *game);
 void	draw_walls(t_game *game);
 
 	// RENDER
-void    render(t_game *game);
-void    my_mlx_put_image_to_window(t_game *game, int x, int y, int color);
-void 	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void	render(t_game *game);
+void	my_mlx_put_image_to_window(t_game *game, int x, int y, int color);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	read_img(t_game *game);
 
 #endif

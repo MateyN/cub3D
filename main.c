@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/22 11:11:44 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:04:34 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	**ft_add_map(int fd)
 		if (ret != 0)
 			line = ft_strjoin(line, buff);
 	}
-	// free(buff);
 	map = ft_split(line, '\n');
 	free(line);
 	return (map);
