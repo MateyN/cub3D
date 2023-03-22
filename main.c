@@ -6,11 +6,11 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:04:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/20 13:59:31 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:11:44 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 char	**ft_add_map(int fd)
 {
