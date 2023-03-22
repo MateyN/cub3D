@@ -1,12 +1,12 @@
-GREEN		=	\e[92;5;118m
-YELLOW		=	\e[93;5;226m
-RESET		=	\e[0m
+GREEN	=	\e[92;5;118m
+YELLOW	=	\e[93;5;226m
+RESET	=	\e[0m
 
 NAME    = cub3D 
 
 LBFT	= libft/libft.a
 
-CC		= cc -g
+CC		= cc #-g
 
 CFLAGS  = -Wall -Wextra -Werror #-fsanitize=address
 
