@@ -6,12 +6,12 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:42 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/14 12:58:43 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:58:27 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+/*
 void	free_game(t_game *game)
 {
 	int i;
@@ -35,7 +35,7 @@ void	free_game(t_game *game)
 	free(game->mlx);
 	free(game);
 }
-
+*/
 void	ft_free_ptr(char **ptr)
 {
 	int	i;

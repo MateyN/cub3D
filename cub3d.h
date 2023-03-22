@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/21 10:47:07 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:02:13 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define ROTSPEED 0.05
 # define MAPHEIGHT 25
 # define MAPWIDTH 25
-# define COLLISION_STEP 0.01
+//# define COLLISION_STEP 0.01
 
 typedef struct	s_move
 {
