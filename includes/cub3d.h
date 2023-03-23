@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:03:05 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/22 16:07:01 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:37:45 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # define PI 3.14159265359
 # define KEYPRESS 2
 # define KEYRELEASE 3
-# define MOVESPEED 1
-# define ROTSPEED 0.05
+# define MOVESPEED 1.5
+# define ROTSPEED 0.1
 # define MAPHEIGHT 25
 # define MAPWIDTH 25
-//# define COLLISION_STEP 0.01
+# define COLLISION_STEP 0.01
 
 typedef struct s_move
 {

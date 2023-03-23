@@ -25,10 +25,10 @@ INCS	= $(wildcard includes/*.h)
 all: $(NAME)
 
 $(NAME): ${OBJS}
-	@printf "$(YELLOW) 	- Compiling $(NAME)... $(RESET)\n"
+	@printf "$(YELLOW) - Compiling $(NAME)... $(RESET)\n"
 	@$(MAKE) -s -C libft --silent
 	@$(CC) $(CFLAGS) $(MLX) ${LBFT} ${OBJS} main.c -o ${NAME}
-	@printf "$(_SUCCESS) $(GREEN)       - $(NAME) is ready!\n$(RESET)"
+	@printf "$(GREEN) - $(NAME) is ready!\n$(RESET)"
 
 %.o: %.c $(INCS)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I includes/
