@@ -5,32 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 11:04:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/22 16:29:47 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/13 10:42:16 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/04/13 10:44:07 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
-int ft_game(t_game *game)
+void	update(t_game *game)
 {
-    rot_left_right(game);
-    if (game->move->right || game->move->left)
-        right_left_movement(game);
-    if (game->move->forward || game->move->backward)
-        forward_backward_movement(game);
-    render(game);   
-    return (0);
+	move_player(game);
+	draw_rays(game);
+	generate_3d_projection(game);
 }
 
-void    ft_cub3d(t_game *game, char **map)
+int	loop_hook(t_game *game)
 {
-    t_move  move;
+	update(game);
+	render(game);
+	return (0);
+}
 
-    ft_init_moves(&move);
-    init_game(game, map, &move);
-    mlx_hook(game->win, KEYPRESS, 1L << 0, ft_press_key, &move);
-	mlx_loop_hook(game->mlx, ft_game, game);
-	mlx_hook(game->win, KEYRELEASE, 1L << 1, ft_release_key, &move);
-	mlx_loop(game->mlx);
+void	set_hooks(t_game *game)
+{
+	mlx_hook(game->win, 2, 0, ft_press_key, game);
+	mlx_hook(game->win, 3, 0, ft_release_key, game);
+	mlx_hook(game->win, 17, 0, ft_close, game);
+}
+
+void	set_game(t_game *game)
+{
+	game->image->img = mlx_new_image(game->mlx, MAPWIDTH, MAPHEIGHT);
+	game->image->addr = mlx_get_data_addr(game->image->img, &game->image->bits_per_pixel,
+			&game->image->line_length, &game->image->endian);
+	game->map->width = MAPWIDTH;
+	game->map->height = MAPHEIGHT;
+}
+
+void	ft_game(t_game *game)
+{
+	set_hooks(game);
+	set_game(game);
 }

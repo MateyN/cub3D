@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 11:03:42 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/21 13:58:27 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/13 10:29:55 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/04/13 10:30:51 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
+
 /*
 void	free_game(t_game *game)
 {
@@ -36,6 +37,7 @@ void	free_game(t_game *game)
 	free(game);
 }
 */
+
 void	ft_free_ptr(char **ptr)
 {
 	int	i;

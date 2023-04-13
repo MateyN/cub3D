@@ -5,36 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 10:12:58 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/21 10:01:35 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/13 10:11:32 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/04/13 11:02:38 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
-void    ft_init_moves(t_move *move)
+void	init_window(t_game *game)
 {
-    move->rotleft = 0;
-    move->rotright = 0;
-    move->backward = 0;
-    move->forward = 0;
-    move->right = 0;
-    move->left = 0;
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		exit_error("mlx_init", "Error initializing MLX");
+	game->win = mlx_new_window(game->mlx,
+			MAPWIDTH, MAPHEIGHT, "cub3D");
+	if (!game->win)
+		exit_error("mlx_window", "Error creating MLX window");
+	game->rays = malloc(sizeof(t_ray) * MAPWIDTH + 1);
+	if (!game->rays)
+		exit_strerr("malloc error", errno);
 }
 
-void    init_game(t_game *game, char **map, t_move *move)
+void	init_map(t_game *game)
 {
-    game->map = map;
-    game->mlx = mlx_init();
-    game->map_size_y = 0;
-    while (map[game->map_size_y])
-        game->map_size_y += 1;
-    game->map_size_x = ft_strlen(map[0]);
-    game->win = mlx_new_window(game->mlx, game->map_size_x * MAPWIDTH, game->map_size_y * MAPHEIGHT, "cub3D");
-    game->img = mlx_new_image(game->mlx, game->map_size_x * MAPWIDTH, game->map_size_y * MAPHEIGHT);
-    read_img(game);
-    game->xc = (game->map_size_x * MAPWIDTH) / 2;
-    game->yc = (game->map_size_y * MAPHEIGHT) / 2;
-    game->angle = PI / 2;
-    game->move = move;
+	game->map->no = NULL;
+	game->map->so = NULL;
+	game->map->we = NULL;
+	game->map->ea = NULL;
+	game->map->floor = -1;
+	game->map->ceiling = -1;
+	game->map->width = 0;
+	game->map->height = 0;
+}
+
+void	init_player(t_game *game)
+{
+	game->player->x = -1;
+	game->player->y = -1;
+    game->player->side = 0;
+	game->player->move = 0;
+	game->player->rotdir = 0;
+	game->player->angle = 0;
+	//game->player->fov = 60 * (M_PI / 180);
+	game->player->rotspeed = 2 * (M_PI / 180);
+	game->player->movespeed = 3;
+	game->player->dist_proj_plane = (MAPWIDTH / 2) / tan(FOV / 2);
+}
+
+void	init_textures(t_game *game)
+{
+	game->sprites->no = draw_sprite(game->mlx, game->map->no);
+	game->sprites->so = draw_sprite(game->mlx, game->map->so);
+	game->sprites->we = draw_sprite(game->mlx, game->map->we);
+	game->sprites->ea = draw_sprite(game->mlx, game->map->ea);
+}
+
+void	init_game(t_game *game)
+{
+	if (!game)
+		exit_strerr("malloc", 2);
+	game->image = malloc(sizeof(t_img));
+	game->sprites = malloc(sizeof(t_sprites));
+	game->map = malloc(sizeof(t_map));
+	game->player = malloc(sizeof(t_player));
+	game->map->map = ft_calloc(1, sizeof(char *));
+	if (!game->image || !game->sprites || !game->map
+		|| !game->player || !game->map->map)
+		exit_strerr("malloc", 2);
+	init_map(game);
+	init_player(game);
 }

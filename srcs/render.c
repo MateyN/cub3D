@@ -5,70 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 10:31:19 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/21 13:57:40 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/13 10:14:50 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/04/13 10:42:45 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
-void my_mlx_pixel_put(t_game *game, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-    char    *dist;
-    int     bits_per_pixel;
-    int     size_line;
-    int     endian;
+	char	*dst;
 
-    dist = mlx_get_data_addr(game->img, &bits_per_pixel, &size_line, &endian);
-    if (x >= 0 && x < game->map_size_x * MAPWIDTH && y >= 0 && y < game->map_size_y * MAPHEIGHT)
-    {
-        int offset = y * size_line + x * (bits_per_pixel / 8);
-        *(unsigned int*)(dist + offset) = color;
-    }
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-void	read_img(t_game *game)
+void	render_3d_wall(t_game *game, int i, t_wall wall)
 {
-	int	width;
-	int	height;
-    
-	game->wall = mlx_xpm_file_to_image(game->mlx, "./assets/wall32x32.xpm", &width, &height);
-	//if (game->wall == NULL)
-	//{
-	//	printf("Error: Failed to load wall image\n");
-	//	exit(0);
-	//}
+	t_img	*wall_texture;
 
-	game->floor = mlx_xpm_file_to_image(game->mlx, "./assets/square.xpm", &width, &height);
-	//if (game->floor == NULL)
-	//{
-	//	printf("Error: Failed to load floor image\n");
-	//	exit(0);
-	//}
+	if (game->rays[i].vert_hit)
+	{
+		if (game->rays[i].ray_left)
+			wall_texture = game->sprites->we;
+		else
+			wall_texture = game->sprites->ea;
+		wall.texture_x = (int)(game->rays[i].hit_y
+				* wall_texture->width / TILES) % wall_texture->width;
+	}
+	else
+	{
+		if (game->rays[i].ray_up)
+			wall_texture = game->sprites->no;
+		else
+			wall_texture = game->sprites->so;
+		wall.texture_x = (int)(game->rays[i].hit_x
+				* wall_texture->width / TILES) % wall_texture->width;
+	}
+	draw_wall(game, wall, wall_texture, i);
 }
 
-void    my_mlx_put_image_to_window(t_game *game, int x, int y, int color)
+void	render(t_game *game)
 {
-    int i;
-    int j;
-
-    i = 0;
-    while (i < MAPHEIGHT)
-    {
-        j = 0;
-        while (j < MAPWIDTH)
-        {
-            my_mlx_pixel_put(game, x + j, y + i, color);
-            j++;
-        }
-        i++;
-    }
-}
-
-void    render(t_game *game)
-{
-    draw_walls(game);
-    draw_rays(game);
-    draw_player(game);
-    mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	mlx_put_image_to_window(game->mlx,
+		game->win, game->image->img, 0, 0);
 }
