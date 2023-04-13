@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 10:43:58 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:29:30 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 float	get_width(char *line)
 {
-	int	len;
+	int	lenght;
 
-	len = ft_strlen(line);
-	return (len * TILES);
+	lenght = ft_strlen(line);
+	return (lenght * TILES);
 }
 
-int	can_move(t_map *map, float x, float y)
+int	can_move(t_map *map, double x, double y)
 {
 	int	x2;
 	int	y2;
@@ -38,20 +38,20 @@ int	can_move(t_map *map, float x, float y)
 
 void	move_player(t_game *game)
 {
-	float	step_x;
-	float	step_y;
-	float	forward;
-    float   side;
+	double	step_x;
+	double	step_y;
+	double	forward;
+    double  sideways;
 
 	step_x = 0;
 	step_y = 0;
 	game->player->angle += game->player->rotdir * game->player->rotspeed;
 	forward = game->player->move * game->player->movespeed;
-    side = game->player->side * (game->player->movespeed - 2);
+    sideways = game->player->side * (game->player->movespeed - 2);	
 	step_x += (cos(game->player->angle) * forward);
-	step_x += (cos(game->player->angle + M_PI / 2) * side);
+	step_x += (cos(game->player->angle + M_PI / 2) * sideways);
     step_y += (sin(game->player->angle) * forward);
-    step_y += (sin(game->player->angle + M_PI / 2) * side);
+    step_y += (sin(game->player->angle + M_PI / 2) * sideways);
 	step_x *= 5;
 	step_y *= 5;
 	if (can_move(game->map, game->player->x + step_x, game->player->y))

@@ -6,13 +6,13 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:16 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 10:10:20 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:32:30 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_cast	*draw_horz(t_game *game, float angle, int i)
+t_cast	*draw_horz(t_game *game, double angle, int i)
 {
 	t_cast	*h;
 
@@ -37,7 +37,7 @@ t_cast	*draw_horz(t_game *game, float angle, int i)
 	return (h);
 }
 
-t_cast	*draw_vert(t_game *game, float angle, int i)
+t_cast	*draw_vert(t_game *game, double angle, int i)
 {
 	t_cast	*v;
 
@@ -70,7 +70,7 @@ void	fill_ray(t_ray *ray, t_cast *dir, int boolean)
 	ray->dist = dir->hit_dist;
 }
 
-void	draw_ray(t_game *game, float angle, int i)
+void	draw_ray(t_game *game, double angle, int i)
 {
 	t_cast	*h;
 	t_cast	*v;
@@ -105,7 +105,7 @@ void	draw_rays(t_game *game)
 	while (++i < MAPWIDTH)
 	{
 		angle = game->player->angle
-			+ atan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
+			+ tan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
 		draw_ray(game, angle, i);
 	}
 }

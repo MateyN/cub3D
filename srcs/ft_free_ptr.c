@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:29:55 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 10:30:51 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:26:13 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_game(t_game *game)
 
 void	ft_free_ptr(char **ptr)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (ptr[i])
@@ -48,5 +48,5 @@ void	ft_free_ptr(char **ptr)
 		free(ptr[i]);
 		i++;
 	}
-	free(ptr);
+	free(ptr);  
 }

@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:32 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 11:02:38 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:27:11 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_game(t_game *game)
 	game->map->map = ft_calloc(1, sizeof(char *));
 	if (!game->image || !game->sprites || !game->map
 		|| !game->player || !game->map->map)
-		exit_strerr("malloc", 2);
+		exit_strerr("error: malloc", 2);
 	init_map(game);
 	init_player(game);
 }
