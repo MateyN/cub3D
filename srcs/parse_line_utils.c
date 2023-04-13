@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:17 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 11:16:33 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:43:24 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	player_direction(char c)
 	return (0);
 }
 
-int	set_lines(t_game *game)
+int	set_map(t_game *game)
 {
     if (game->map->floor == -1 || game->map->ceiling == -1
             || game->map->no == NULL || game->map->so == NULL

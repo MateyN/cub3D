@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:16 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:32:30 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:58:09 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,10 @@ void	draw_ray(t_game *game, double angle, int i)
 	t_cast	*h;
 	t_cast	*v;
 
-	angle = adjust_angle(angle);
-	game->rays[i].ray_down = (angle > 0 && angle < M_PI);
+	game->rays[i].ray_down = (angle > 0 && angle < PI);
 	game->rays[i].ray_up = !game->rays[i].ray_down;
-	game->rays[i].ray_right = (angle < 0.5 * M_PI
-			|| angle > 1.5 * M_PI);
+	game->rays[i].ray_right = (angle < 0.5 * PI
+			|| angle > 1.5 * PI);
 	game->rays[i].ray_left = !game->rays[i].ray_right;
 	h = draw_horz(game, angle, i);
 	v = draw_vert(game, angle, i);
@@ -90,7 +89,7 @@ void	draw_ray(t_game *game, double angle, int i)
 	else
 		fill_ray(&game->rays[i], h, FALSE);
 	if (game->rays[i].dist == 0)
-		game->rays[i].dist = 0.0001;
+		game->rays[i].dist = 0.01;
 	game->rays[i].angle = angle;
 	free(h);
 	free(v);

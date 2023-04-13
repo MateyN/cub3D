@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:04 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 11:12:06 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:44:05 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	checker(t_game *game, char **map)
 	int		j;
 
 	i = 0;
-	while (map[++i] && set_lines(game) == 0)
+	while (map[++i] && set_map(game) == 0)
 	{
 		j = -1;
 		while (map[i][++j])

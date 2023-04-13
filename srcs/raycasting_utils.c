@@ -6,19 +6,11 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:34 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:34:58 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:57:36 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-double	adjust_angle(double angle)
-{
-	angle = remainder(angle, (2 * M_PI));
-	if (angle < 0)
-		angle += (2 * M_PI);
-	return (angle);
-}
 
 double	calc_wall_dist(double x1, double y1, double x2, double y2)
 {

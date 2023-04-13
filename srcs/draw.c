@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:23:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:25:45 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:47:07 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void    draw_player(t_game *game, char **map, int y, int x)
 	game->player->x = (x * TILES) + 14;
 	game->player->y = (y * TILES) + 14;
 	if (map[y][x] == 'N')
-	    game->player->angle = 270 * (M_PI / 180);   
+	    game->player->angle = 270 * (PI / 180);   
 	else if (map[y][x] == 'S')
-		game->player->angle = 90 * (M_PI / 180);    
+		game->player->angle = 90 * (PI / 180);    
 	else if (map[y][x] == 'W')
-		game->player->angle = 180 * (M_PI / 180);
+		game->player->angle = 180 * (PI / 180);
 	else if (map[y][x] == 'E')
-		game->player->angle = 0 * (M_PI / 180);
+		game->player->angle = 0 * (PI / 180);
 	game->map->map[y][x] = '0';
 }
 
