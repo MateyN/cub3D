@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:47:34 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:01:02 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	can_move(t_map *map, double x, double y)
 	x2 = floor(x / TILES);
 	y2 = floor(y / TILES);
 	if (y < 0 || y > map->map_size_y)
-		return (FALSE);
+		return (0);
 	if (x < 0 || x > get_width(map->map[y2]))
-		return (FALSE);
+		return (0);
 	if (map->map[y2][x2] != '1')
-		return (TRUE);
-	return (FALSE);
+		return (1);
+	return (0);
 }
 
 void	move_player(t_game *game)

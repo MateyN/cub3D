@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:16 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:58:09 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:01:28 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_cast	*draw_horz(t_game *game, double angle, int i)
 	t_cast	*h;
 
 	h = (t_cast *)malloc(sizeof(t_cast));
-	h->wall_hit = FALSE;
+	h->wall_hit = 0;
 	h->hit_x = 0;
 	h->hit_y = 0;
 	h->touch_y = floor(game->player->y / TILES) * TILES;
@@ -42,7 +42,7 @@ t_cast	*draw_vert(t_game *game, double angle, int i)
 	t_cast	*v;
 
 	v = (t_cast *)malloc(sizeof(t_cast));
-	v->wall_hit = FALSE;
+	v->wall_hit = 0;
 	v->hit_x = 0;
 	v->hit_y = 0;
 	v->touch_x = floor(game->player->x / TILES) * TILES;
@@ -85,9 +85,9 @@ void	draw_ray(t_game *game, double angle, int i)
 	h->hit_dist = get_dist_to_wall(game, h);
 	v->hit_dist = get_dist_to_wall(game, v);
 	if (v->hit_dist < h->hit_dist)
-		fill_ray(&game->rays[i], v, TRUE);
+		fill_ray(&game->rays[i], v, 1);
 	else
-		fill_ray(&game->rays[i], h, FALSE);
+		fill_ray(&game->rays[i], h, 0);
 	if (game->rays[i].dist == 0)
 		game->rays[i].dist = 0.01;
 	game->rays[i].angle = angle;

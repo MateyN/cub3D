@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:34 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:57:36 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:02:41 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	find_hor_wall_hit(t_game *game, t_cast *h, int i)
 		&& h->touch_y <= game->map->map_size_y)
 	{
 		if (!can_move(game->map, h->touch_x,
-				h->touch_y - (game->rays[i].ray_up == TRUE)))
+				h->touch_y - (game->rays[i].ray_up == 1)))
 		{
-			h->wall_hit = TRUE;
+			h->wall_hit = 1;
 			h->hit_x = h->touch_x;
 			h->hit_y = h->touch_y;
 			break ;
@@ -57,10 +57,10 @@ void	find_vert_wall_hit(t_game *game, t_cast *v, int i)
 		&& v->touch_y <= game->map->map_size_y)
 	{
 		if (!can_move(game->map,
-				v->touch_x - (game->rays[i].ray_left == TRUE),
+				v->touch_x - (game->rays[i].ray_left == 1),
 				v->touch_y))
 		{
-			v->wall_hit = TRUE;
+			v->wall_hit = 1;
 			v->hit_x = v->touch_x;
 			v->hit_y = v->touch_y;
 			break ;
