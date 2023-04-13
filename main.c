@@ -5,51 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 11:04:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/03/22 16:04:34 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/13 10:10:07 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/04/13 10:47:01 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
-
-char	**ft_add_map(int fd)
-{
-	char	**map;
-	char	*line;
-	char	*buff;
-	int		ret;
-
-	buff = ft_calloc(2, sizeof(char));
-	if (!buff)
-		return (NULL);
-	line = ft_strdup("");
-	ret = 1;
-	while (ret != 0)
-	{
-		ret = read(fd, buff, 1);
-		if (ret == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-		if (ret != 0)
-			line = ft_strjoin(line, buff);
-	}
-	map = ft_split(line, '\n');
-	free(line);
-	return (map);
-}
+#include "includes/cub3D.h"
 
 int	main(int ac, char **av)
 {
-	char	**map;
-	t_game	game;
-	int		fd;
+	t_game	*game;
 
-	(void)ac;
-	game.angle = PI / 2;
-	fd = open(av[1], O_RDONLY);
-	map = ft_add_map(fd);
-	ft_cub3d(&game, map);
+	if (ac != 2)
+		exit_success("Wrong usage! -> ./cub3D maps/.. .cub");
+	game = (t_game *)malloc(sizeof(t_game));
+	parsing(game, av[1]);
+	init_window(game);
+	init_textures(game);
+	ft_game(game);
+	mlx_loop_hook(game->mlx, loop_hook, game);
+	mlx_loop(game->mlx);
 	return (0);
 }
