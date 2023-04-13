@@ -6,13 +6,13 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:34 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 10:10:37 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:34:58 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-float	adjust_angle(float angle)
+double	adjust_angle(double angle)
 {
 	angle = remainder(angle, (2 * M_PI));
 	if (angle < 0)
@@ -20,12 +20,12 @@ float	adjust_angle(float angle)
 	return (angle);
 }
 
-float	calc_wall_dist(float x1, float y1, float x2, float y2)
+double	calc_wall_dist(double x1, double y1, double x2, double y2)
 {
 	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 
-float	get_dist_to_wall(t_game *game, t_cast *dir)
+double	get_dist_to_wall(t_game *game, t_cast *dir)
 {
 	if (dir->wall_hit)
 		return (calc_wall_dist(game->player->x, game->player->y,
