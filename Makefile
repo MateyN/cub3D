@@ -2,7 +2,7 @@ GREEN	=	\e[92;5;118m
 YELLOW	=	\e[93;5;226m
 RESET	=	\e[0m
 
-NAME    = cub3D 
+NAME    = cub3D
 
 LBFT	= libft/libft.a
 
@@ -29,6 +29,7 @@ $(NAME): ${OBJS}
 	@$(MAKE) -s -C libft --silent
 	@$(CC) $(CFLAGS) $(MLX) ${LBFT} ${OBJS} main.c -o ${NAME}
 	@printf "$(GREEN) - $(NAME) is ready!\n$(RESET)"
+	@printf "$(GREEN) - HAVE FUN PLAYING $(NAME)!\n$(RESET)"
 
 %.o: %.c $(INCS)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I includes/
@@ -45,3 +46,4 @@ re: fclean all
 	@$(MAKE) -s -C libft --silent
 
 .PHONY: all clean fclean re
+
