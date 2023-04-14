@@ -6,25 +6,25 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 10:28:03 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:28:53 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	check_text_name(char *name)
+int	check_text_name(char *element)
 {
-	if (!ft_strncmp(name, "NO", 3))
+	if (!ft_strncmp(element, "NO", 3))
 		return (NO);
-	else if (!ft_strncmp(name, "SO", 3))
+	else if (!ft_strncmp(element, "SO", 3))
 		return (SO);
-	else if (!ft_strncmp(name, "WE", 3))
+	else if (!ft_strncmp(element, "WE", 3))
 		return (WE);
-	else if (!ft_strncmp(name, "EA", 3))
+	else if (!ft_strncmp(element, "EA", 3))
 		return (EA);
-	else if (!ft_strncmp(name, "F", 2))
+	else if (!ft_strncmp(element, "F", 2))
 		return (F);
-	else if (!ft_strncmp(name, "C", 2))
+	else if (!ft_strncmp(element, "C", 2))
 		return (C);
 	else
 		return (ERROR);
@@ -58,7 +58,7 @@ int	get_color(char *line, int *i)
 	return (color);
 }
 
-void	color_parsing(t_game *game, char *line, int token, int i)
+void	color_parsing(t_game *game, char *line, int element, int i)
 {
 	int		color[3];
 	int		n;
@@ -72,29 +72,29 @@ void	color_parsing(t_game *game, char *line, int token, int i)
 	if (line[i])
 		exit_error("Error: color", line);
 	check_lenght(line);
-	if (token == F && game->map->floor == -1)
+	if (element == F && game->map->floor == -1)
 		game->map->floor = (color[0] << 16) + (color[1] << 8) + color[2];
-	else if (token == C && game->map->ceiling == -1)
+	else if (element == C && game->map->ceiling == -1)
 		game->map->ceiling = (color[0] << 16) + (color[1] << 8) + color[2];
 	else
 		exit_error("Error: duplicate color", line);
 	free(line);
 }
 
-void	texture_parsing(t_game *game, char *line, int token, int i)
+void	texture_parsing(t_game *game, char *line, int element, int i)
 {
 	char	*path;
 
 	ft_isspaces(line, &i);
 	path = ft_strdup(&line[i]);
 	file_checker(path, ".xpm\0");
-	if (token == NO && !game->map->no)
+	if (element == NO && !game->map->no)
 		game->map->no = path;
-	else if (token == SO && !game->map->so)
+	else if (element == SO && !game->map->so)
 		game->map->so = path;
-	else if (token == WE && !game->map->we)
+	else if (element == WE && !game->map->we)
 		game->map->we = path;
-	else if (token == EA && !game->map->ea)
+	else if (element == EA && !game->map->ea)
 		game->map->ea = path;
 	else
 		exit_error("Error: duplicate texture", line);
@@ -105,7 +105,7 @@ int	line_parsing(t_game *game, char *line)
 {
 	int		i;
 	int		j;
-	int		token;
+	int		element;
 	char	*name;
 
 	i = 0;
@@ -116,13 +116,13 @@ int	line_parsing(t_game *game, char *line)
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
 	name = ft_substr(line, j, i - j);
-	token = check_text_name(name);
-	if (token == ERROR)
+	element = check_text_name(name);
+	if (element == ERROR)
 		exit_error("Error: texture name", name);
-	else if (token == F || token == C)
-		color_parsing(game, ft_strtrim(line, "\n"), token, i);
+	else if (element == F || element == C)
+		color_parsing(game, ft_strtrim(line, "\n"), element, i);
 	else
-		texture_parsing(game, ft_strtrim(line, "\n"), token, i);
+		texture_parsing(game, ft_strtrim(line, "\n"), element, i);
 	free(name);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 12:10:54 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:17:54 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	draw_rays(t_game *game)
 	while (++i < MAPWIDTH)
 	{
 		angle = game->player->angle
-			+ atan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
+			+ tan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
 		draw_ray(game, angle, i);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:32 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:47:25 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:15:10 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	init_window(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		exit_error("mlx_init", "Error initializing MLX");
+		exit_error("mlx_init", "Error: cannot initialize MLX library");
 	game->win = mlx_new_window(game->mlx,
 			MAPWIDTH, MAPHEIGHT, "cub3D");
 	if (!game->win)
-		exit_error("mlx_window", "Error creating MLX window");
+		exit_error("mlx_window", "Error: cannot open window");
 	game->rays = malloc(sizeof(t_ray) * MAPWIDTH + 1);
 	if (!game->rays)
 		exit_strerr("malloc error", errno);
@@ -62,7 +62,7 @@ void	init_textures(t_game *game)
 void	init_game(t_game *game)
 {
 	if (!game)
-		exit_strerr("malloc", 2);
+		exit_strerr("Error: malloc", 2);
 	game->image = malloc(sizeof(t_img));
 	game->sprites = malloc(sizeof(t_sprites));
 	game->map = malloc(sizeof(t_map));
@@ -70,7 +70,7 @@ void	init_game(t_game *game)
 	game->map->map = ft_calloc(1, sizeof(char *));
 	if (!game->image || !game->sprites || !game->map
 		|| !game->player || !game->map->map)
-		exit_strerr("error: malloc", 2);
+		exit_strerr("Error: malloc", 2);
 	init_map(game);
 	init_player(game);
 }
