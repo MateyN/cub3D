@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:13 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 10:44:10 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:11:06 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	calc_wall_dist(double x1, double y1, double x2, double y2)
 	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 
-int	get_dist_to_wall(t_game *game, t_cast *dir)
+int	get_dist_to_wall(t_game *game, t_intersection *dir)
 {
 	if (dir->wall_hit)
 		return (calc_wall_dist(game->player->x, game->player->y,
@@ -26,7 +26,7 @@ int	get_dist_to_wall(t_game *game, t_cast *dir)
 		return (INT_MAX);
 }
 
-void	find_hor_wall_hit(t_game *game, t_cast *h, int i)
+void	find_hor_wall_hit(t_game *game, t_intersection *h, int i)
 {
 	while (h->touch_x >= 0
 		&& h->touch_x <= game->map->map_size_x
@@ -49,7 +49,7 @@ void	find_hor_wall_hit(t_game *game, t_cast *h, int i)
 	}
 }
 
-void	find_vert_wall_hit(t_game *game, t_cast *v, int i)
+void	find_vert_wall_hit(t_game *game, t_intersection *v, int i)
 {
 	while (v->touch_x >= 0
 		&& v->touch_x <= game->map->map_size_x

@@ -6,17 +6,17 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 10:45:24 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:10:54 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_cast	*draw_horz(t_game *game, double angle, int i)
+t_intersection	*draw_horz(t_game *game, double angle, int i)
 {
-	t_cast	*h;
+	t_intersection	*h;
 
-	h = (t_cast *)malloc(sizeof(t_cast));
+	h = (t_intersection *)malloc(sizeof(t_intersection));
 	h->wall_hit = 0;
 	h->hit_x = 0;
 	h->hit_y = 0;
@@ -37,11 +37,11 @@ t_cast	*draw_horz(t_game *game, double angle, int i)
 	return (h);
 }
 
-t_cast	*draw_vert(t_game *game, double angle, int i)
+t_intersection	*draw_vert(t_game *game, double angle, int i)
 {
-	t_cast	*v;
+	t_intersection	*v;
 
-	v = (t_cast *)malloc(sizeof(t_cast));
+	v = (t_intersection *)malloc(sizeof(t_intersection));
 	v->wall_hit = 0;
 	v->hit_x = 0;
 	v->hit_y = 0;
@@ -62,7 +62,7 @@ t_cast	*draw_vert(t_game *game, double angle, int i)
 	return (v);
 }
 
-void	fill_ray(t_ray *ray, t_cast *dir, int boolean)
+void	fill_ray(t_ray *ray, t_intersection *dir, int boolean)
 {
 	ray->hit_x = dir->hit_x;
 	ray->hit_y = dir->hit_y;
@@ -72,8 +72,8 @@ void	fill_ray(t_ray *ray, t_cast *dir, int boolean)
 
 void	draw_ray(t_game *game, double angle, int i)
 {
-	t_cast	*h;
-	t_cast	*v;
+	t_intersection	*h;
+	t_intersection	*v;
 
 	game->rays[i].ray_down = (angle > 0 && angle < PI);
 	game->rays[i].ray_up = !game->rays[i].ray_down;
