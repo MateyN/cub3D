@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 12:28:53 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:38:25 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	color_parsing(t_game *game, char *line, int element, int i)
 	}
 	if (line[i])
 		exit_error("Error: color", line);
-	check_lenght(line);
+	check_length(line);
 	if (element == F && game->map->floor == -1)
 		game->map->floor = (color[0] << 16) + (color[1] << 8) + color[2];
 	else if (element == C && game->map->ceiling == -1)

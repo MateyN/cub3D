@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:17 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:43:24 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:38:35 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	set_map(t_game *game)
 	return (0);
 }
 
-void	check_lenght(char *line)
+void	check_length(char *line)
 {
 	int		i;
 	char	**f;
