@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 10:10:34 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 14:02:41 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/14 10:34:13 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/04/14 10:44:10 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-double	calc_wall_dist(double x1, double y1, double x2, double y2)
+int	calc_wall_dist(double x1, double y1, double x2, double y2)
 {
 	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 
-double	get_dist_to_wall(t_game *game, t_cast *dir)
+int	get_dist_to_wall(t_game *game, t_cast *dir)
 {
 	if (dir->wall_hit)
 		return (calc_wall_dist(game->player->x, game->player->y,

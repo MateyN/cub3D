@@ -1,6 +1,6 @@
-NO assets/bricks.xpm
-SO assets/bricks2.xpm
-WE assets/woodplanks.xpm
+NO assets/tile.xpm
+SO assets/warm.xpm
+WE assets/stucco.xpm
 
 C 135, 206, 235
 F 205, 133, 0

@@ -1,7 +1,7 @@
-NO assets/bricks.xpm
-SO assets/bricks2.xpm
-WE assets/woodplanks.xpm
-EA assets/woodplanks2.xpm
+NO assets/support.xpm
+SO assets/console.xpm
+WE assets/crate.xpm
+EA assets/crate2.xpm
 
 C 135, 206, 235
 F 

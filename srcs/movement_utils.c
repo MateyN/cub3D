@@ -6,13 +6,13 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 14:01:02 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:07:10 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-float	get_width(char *line)
+int	get_width(char *line)
 {
 	int	lenght;
 
@@ -38,10 +38,10 @@ int	can_move(t_map *map, double x, double y)
 
 void	move_player(t_game *game)
 {
-	double	step_x;
-	double	step_y;
-	double	forward;
-    double  sideways;
+	int	step_x;
+	int	step_y;
+	int	forward;
+    int sideways;
 
 	step_x = 0;
 	step_y = 0;

@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:04 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:44:05 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:27:06 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	check_map(t_game *game)
 {
 	if (!game->map->no || !game->map->so || !game->map->we || !game->map->ea)
-		exit_str("Texture is missing");
+		exit_str("Error: Texture is missing");
 	else if (game->map->floor == -1 || game->map->ceiling == -1)
-		exit_str("Color is missing");
+		exit_str("Error: Color is missing");
 	else if (!game->map->map[0])
-		exit_str("Map is missing");
+		exit_str("Error: Map is missing");
 	else if (game->player->x == -1 || game->player->y == -1)
-		exit_str("Player is missing");
+		exit_str("Error: Player is missing");
 }
 
 void	check_borders(char **map)
@@ -66,7 +66,7 @@ void	checker(t_game *game, char **map)
 					|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
 					|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
 					|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
-					exit_error("Invalid map", map[i]);
+					exit_error("Error: Invalid map", map[i]);
 			}
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
@@ -82,7 +82,7 @@ void	map_parsing(t_game *game, char *line, int fd)
 	while (line)
 	{
 		if (!is_map(line))
-			exit_error("Invalid map", line);
+			exit_error("Error: Invalid map", line);
 		game->map->height++;
 		tmp = ft_strtrim(line, "\n");
 		if (game->map->width < (int)ft_strlen(tmp))

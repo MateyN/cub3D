@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 10:10:16 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 14:01:28 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
+/*   Updated: 2023/04/14 10:45:24 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	draw_ray(t_game *game, double angle, int i)
 	else
 		fill_ray(&game->rays[i], h, 0);
 	if (game->rays[i].dist == 0)
-		game->rays[i].dist = 0.01;
+		game->rays[i].dist = 0.0001;
 	game->rays[i].angle = angle;
 	free(h);
 	free(v);
@@ -104,7 +104,7 @@ void	draw_rays(t_game *game)
 	while (++i < MAPWIDTH)
 	{
 		angle = game->player->angle
-			+ tan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
+			+ atan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
 		draw_ray(game, angle, i);
 	}
 }

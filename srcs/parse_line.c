@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 11:16:16 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:28:03 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_color(char *line, int *i)
 	color = ft_atoi(rgb);
 	free(rgb);
 	if (color < 0 || color > 255)
-		exit_error("Color out of range", line);
+		exit_error("Error: Color out of range", line);
 	return (color);
 }
 

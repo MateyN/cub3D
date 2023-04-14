@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:23:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:47:07 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:26:29 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_img   *draw_sprite(void *mlx, char *path)
 
 	sprite = malloc(sizeof(t_img));
 	if (!sprite)
-		exit_strerr("malloc", 2);
+		exit_strerr("error: malloc", 2);
 	sprite->img = mlx_xpm_file_to_image(mlx, path,
 		    &sprite->width, &sprite->height);   
 	if (!sprite->img)
