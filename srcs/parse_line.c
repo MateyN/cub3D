@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 12:38:25 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/17 10:50:58 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	get_color(char *line, int *i)
 
 void	color_parsing(t_game *game, char *line, int element, int i)
 {
-	int		color[3];
-	int		n;
+	int	color[3];
+	int	n;
 
 	n = -1;
 	while (++n < 3)

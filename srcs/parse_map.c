@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:04 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 10:27:06 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/17 10:59:58 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ void	checker(t_game *game, char **map)
 	}
 }
 
+/**
+@brief Parses the map by reading from a file descriptor.
+@param game A pointer to the game struct.
+@param line The current line of the file being read.
+@param fd The file descriptor of the map file.
+*/
 void	map_parsing(t_game *game, char *line, int fd)
 {
 	char	*tmp;
