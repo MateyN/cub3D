@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/17 10:55:15 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:28:32 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_width(char *line)
 @param map The game map.
 @param x The x position to check.
 @param y The y position to check.
-@return int returns 1 if the player can move, 0 otherwise.
+@return returns 1 if the player can move, 0 otherwise.
 */
 int	can_move(t_map *map, double x, double y)
 {

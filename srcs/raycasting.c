@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/17 11:09:59 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:27:59 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_intersection	*draw_horz(t_game *game, double angle, int i)
 	h->wall_hit = 0;
 	h->hit_x = 0;
 	h->hit_y = 0;
+	// finds the y-coordinate of the nearest horizontal grid line below the player's position
 	h->touch_y = floor(game->player->y / TILES) * TILES;
 	if (game->rays[i].ray_down)
 		h->touch_y += TILES;
@@ -29,8 +30,9 @@ t_intersection	*draw_horz(t_game *game, double angle, int i)
 	if (game->rays[i].ray_up)
 		h->step_y *= -1;
 	h->step_x = TILES / tan(angle);
+	// Check if the ray is pointing at the correct direction
 	if (game->rays[i].ray_left && h->step_x > 0)
-		h->step_x *= -1;
+		h->step_x *= -1; // adjust direction if necessary
 	if (game->rays[i].ray_right && h->step_x < 0)
 		h->step_x *= -1;
 	find_hor_wall_hit(game, h, i);
@@ -99,8 +101,8 @@ void	draw_rays(t_game *game)
 {
 	int		i;
 	float	angle;
-
-	i = -1;
+	
+	i = 0;
 	while (++i < MAPWIDTH)
 	{
 		angle = game->player->angle
