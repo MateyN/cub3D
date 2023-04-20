@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/20 10:50:01 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:10:08 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,20 @@ void	draw_ray(t_game *game, double angle, int i)
 	game->rays[i].ray_left = !game->rays[i].ray_right;
 	h = draw_horz(game, angle, i);
 	v = draw_vert(game, angle, i);
+	//printf("Horz intersection at %p\n", h);
+    //printf("Vert intersection at %p\n", v);
 	h->hit_dist = get_dist_to_wall(game, h);
 	v->hit_dist = get_dist_to_wall(game, v);
 	if (v->hit_dist < h->hit_dist)
 		fill_ray(&game->rays[i], v, 1);
 	else
 		fill_ray(&game->rays[i], h, 0);
+		//printf("Filled ray at %p\n", &game->rays[i]);
 	if (game->rays[i].dist == 0)
 		game->rays[i].dist = 0.0001;
 	game->rays[i].angle = angle;
+	//printf("Freeing horz intersection at %p\n", h);
+    //printf("Freeing vert intersection at %p\n", v);
 	free(h);
 	free(v);
 }
