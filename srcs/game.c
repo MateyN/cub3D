@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:42:16 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 13:26:37 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:37:58 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	update(t_game *game)
 {
 	move_player(game);  
 	draw_rays(game);    
-	generate_3d_projection(game);
+	render_3d_view(game);
 }
 
 int	loop_hook(t_game *game)
