@@ -6,15 +6,15 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:12:20 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/17 10:34:01 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:16:40 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 /**
 @brief Generates the 3D projection of the walls in the game.
-    This function uses ray-casting to calculate the distance to the walls and their
-    height on the projection plane, and then renders them in a 3D perspective.
+This function uses ray-casting to calculate the distance to the walls and their
+height on the projection plane, and then renders them in a 3D perspective.
 @param game A pointer to the game struct containing all relevant information.
 @return void.
 */

@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:04 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/17 10:59:58 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/19 09:39:04 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	check_borders(char **map)
 
 void	checker(t_game *game, char **map)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[++i] && set_map(game) == 0)

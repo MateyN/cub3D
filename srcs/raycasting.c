@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/18 13:27:59 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:06:10 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@ t_intersection	*draw_horz(t_game *game, double angle, int i)
 
 	h = (t_intersection *)malloc(sizeof(t_intersection));
 	h->wall_hit = 0;
-	h->hit_x = 0;
-	h->hit_y = 0;
+	h->wall_interX = 0;
+	h->wall_interY = 0;
 	// finds the y-coordinate of the nearest horizontal grid line below the player's position
-	h->touch_y = floor(game->player->y / TILES) * TILES;
+	h->currentY = floor(game->player->y / TILES) * TILES;
 	if (game->rays[i].ray_down)
-		h->touch_y += TILES;
-	h->touch_x = game->player->x
-		+ (h->touch_y - game->player->y) / tan(angle);
-	h->step_y = TILES;
+		h->currentY += TILES;
+	h->currentX = game->player->x
+		+ (h->currentY - game->player->y) / tan(angle);
+	h->deltaY = TILES;
 	if (game->rays[i].ray_up)
-		h->step_y *= -1;
-	h->step_x = TILES / tan(angle);
+		h->deltaY *= -1;
+	h->deltaX = TILES / tan(angle);
 	// Check if the ray is pointing at the correct direction
-	if (game->rays[i].ray_left && h->step_x > 0)
-		h->step_x *= -1; // adjust direction if necessary
-	if (game->rays[i].ray_right && h->step_x < 0)
-		h->step_x *= -1;
-	find_hor_wall_hit(game, h, i);
+	if (game->rays[i].ray_left && h->deltaX > 0)
+		h->deltaX *= -1; // adjust direction if necessary
+	if (game->rays[i].ray_right && h->deltaX < 0)
+		h->deltaX *= -1;
+	dda_hor_step(game, h, i);
 	return (h);
 }
 
@@ -45,29 +45,29 @@ t_intersection	*draw_vert(t_game *game, double angle, int i)
 
 	v = (t_intersection *)malloc(sizeof(t_intersection));
 	v->wall_hit = 0;
-	v->hit_x = 0;
-	v->hit_y = 0;
-	v->touch_x = floor(game->player->x / TILES) * TILES;
+	v->wall_interX = 0;
+	v->wall_interY = 0;
+	v->currentX = floor(game->player->x / TILES) * TILES;
 	if (game->rays[i].ray_right)
-		v->touch_x += TILES;
-	v->touch_y = game->player->y
-		+ (v->touch_x - game->player->x) * tan(angle);
-	v->step_x = TILES;
+		v->currentX += TILES;
+	v->currentY = game->player->y
+		+ (v->currentX - game->player->x) * tan(angle);
+	v->deltaX = TILES;
 	if (game->rays[i].ray_left)
-		v->step_x *= -1;
-	v->step_y = TILES * tan(angle);
-	if (game->rays[i].ray_up && v->step_y > 0)
-		v->step_y *= -1;
-	if (game->rays[i].ray_down && v->step_y < 0)
-		v->step_y *= -1;
-	find_vert_wall_hit(game, v, i);
+		v->deltaX *= -1;
+	v->deltaY = TILES * tan(angle);
+	if (game->rays[i].ray_up && v->deltaY > 0)
+		v->deltaY *= -1;
+	if (game->rays[i].ray_down && v->deltaY < 0)
+		v->deltaY *= -1;
+	dda_vert_step(game, v, i);
 	return (v);
 }
 
 void	fill_ray(t_ray *ray, t_intersection *dir, int boolean)
 {
-	ray->hit_x = dir->hit_x;
-	ray->hit_y = dir->hit_y;
+	ray->hit_x = dir->wall_interX;
+	ray->hit_y = dir->wall_interY;
 	ray->vert_hit = boolean;
 	ray->dist = dir->hit_dist;
 }
