@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/20 10:06:10 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:50:01 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ void	draw_ray(t_game *game, double angle, int i)
 
 	game->rays[i].ray_down = (angle > 0 && angle < PI);
 	game->rays[i].ray_up = !game->rays[i].ray_down;
-	game->rays[i].ray_right = (angle < 0.5 * PI
-			|| angle > 1.5 * PI);
+	// radians = degrees * (PI / 180)
+	game->rays[i].ray_right = (angle < ANGLE_90 || angle > ANGLE_270); // 90 degrees * (PI / 180) = 1.5708 (1.5) radians
+			// 30 degrees * (PI / 180) = 0.5236 (0.5) radians
 	game->rays[i].ray_left = !game->rays[i].ray_right;
 	h = draw_horz(game, angle, i);
 	v = draw_vert(game, angle, i);

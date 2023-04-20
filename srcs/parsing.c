@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:46 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 11:16:54 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:33:58 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	parsing(t_game *game, char *str)
 	init_game(game);
 	file_parsing(game, fd);
 	close(fd);
-	checker(game, game->map->map);
+	check_map_content(game, game->map->map);
 	check_map(game);
-	check_borders(game->map->map);
+	check_map_borders(game->map->map);
 }

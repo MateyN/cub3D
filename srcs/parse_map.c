@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:04 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/19 09:39:04 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:32:54 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_map(t_game *game)
 		exit_str("Error: Player is missing");
 }
 
-void	check_borders(char **map)
+void	check_map_borders(char **map)
 {
 	int	j;
 	int	i;
@@ -46,7 +46,7 @@ void	check_borders(char **map)
 	}
 }
 
-void	checker(t_game *game, char **map)
+void	check_map_content(t_game *game, char **map)
 {
 	int	i;
 	int	j;
@@ -62,12 +62,14 @@ void	checker(t_game *game, char **map)
 				if (j > (int)ft_strlen(map[i + 1])
 					|| j > (int)ft_strlen(map[i - 1]))
 					exit_str("Error: Invalid map");
+					// Checks if any of the surrounding elements are not walls or empty spaces
 				if (map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
 					|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
 					|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
 					|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
 					exit_error("Error: Invalid map", map[i]);
 			}
+			// Checks if there is a player's starting position if so draw the player
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 				draw_player(game, map, i, j);
