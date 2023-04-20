@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/17 10:50:58 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:31:46 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_color(char *line, int *i)
 	color = ft_atoi(rgb);
 	free(rgb);
 	if (color < 0 || color > 255)
-		exit_error("Error: Color out of range", line);
+		exit_error("Error: color out of range", line);
 	return (color);
 }
 
@@ -118,7 +118,7 @@ int	line_parsing(t_game *game, char *line)
 	name = ft_substr(line, j, i - j);
 	element = check_text_name(name);
 	if (element == ERROR)
-		exit_error("Error: texture name", name);
+		exit_error("Error: color", name);
 	else if (element == F || element == C)
 		color_parsing(game, ft_strtrim(line, "\n"), element, i);
 	else
