@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/20 17:10:08 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:48:48 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,13 @@ void	draw_rays(t_game *game)
 	float	angle;
 	
 	i = 0;
+	//printf("Counter start at %d\n", i);
 	while (++i < MAPWIDTH)
 	{
+		//printf("Counter is at %d\n", i);
 		angle = game->player->angle
 			+ tan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
 		draw_ray(game, angle, i);
 	}
+	//printf("Counter finish at %d\n", i);
 }

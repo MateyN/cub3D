@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/17 12:28:32 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:02:10 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	move_player(t_game *game)
 	step_x = step_x + (cos(game->player->angle + PI / 2) * sideways);
     step_y = step_y + (sin(game->player->angle) * forward);
     step_y = step_y + (sin(game->player->angle + PI / 2) * sideways);
-	step_x = step_x * 5; // movespeed
-	step_y = step_y * 5; // movespeed
+	step_x *= 2; // movespeed
+	step_y *= 2; // movespeed
 	if (can_move(game->map, game->player->x + step_x, game->player->y))
-		game->player->x += step_x / 5; // adjust movespeed
+		game->player->x += step_x;
 	if (can_move(game->map, game->player->x, game->player->y + step_y))
-		game->player->y += step_y / 5; // adjust movespeed
+		game->player->y += step_y;
 }

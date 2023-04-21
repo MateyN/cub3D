@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:23:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/20 17:49:03 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:55:44 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void draw_wall(t_game *game, t_wall wall, t_img *wall_texture, int i)
 	while (j < wall.draw_y)
 		my_mlx_pixel_put(game->image, i, j++, game->map->ceiling);
 		// Draw the wall itself
-	while (j < wall.draw_x)
+	while (++j < wall.draw_x)
 	{
 	// Calculate the height of the wall to draw, and the corresponding texture position
 		wall.draw = j + (wall.wall_height / 2) - (MAPHEIGHT / 2); // Putting the wall vertically on the screen
@@ -39,11 +39,11 @@ void draw_wall(t_game *game, t_wall wall, t_img *wall_texture, int i)
 		// Calculate the position in memory of the texture pixel to draw
 		dst = wall_texture->addr + wall.texture_y * wall_texture->line_length
 			+ wall.texture_x * (wall_texture->bits_per_pixel / 8);
-		my_mlx_pixel_put(game->image, i, j++, *(unsigned int *)dst);
+		my_mlx_pixel_put(game->image, i, j, *(unsigned int *)dst);
 	}
 	// Draw the floor below the wall
-	while (j < MAPHEIGHT)
-		my_mlx_pixel_put(game->image, i, j++, game->map->floor);
+	while (++j < MAPHEIGHT)
+		my_mlx_pixel_put(game->image, i, j, game->map->floor);
 }
 
 /**
