@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:23:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/21 11:55:44 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:09:09 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void draw_wall(t_game *game, t_wall wall, t_img *wall_texture, int i)
 	char	*dst;
 	// Draw the ceiling up to the top of the wall
 	j = 0;
-	while (j < wall.draw_y)
-		my_mlx_pixel_put(game->image, i, j++, game->map->ceiling);
+	while (++j < wall.draw_y)
+		my_mlx_pixel_put(game->image, i, j, game->map->ceiling);
 		// Draw the wall itself
 	while (++j < wall.draw_x)
 	{
