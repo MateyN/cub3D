@@ -31,15 +31,15 @@ int	set_map(t_game *game)
 void	check_length(char *line)
 {
 	int		i;
-	char	**f;
+	char	**split;
 
 	i = 0;
-	f = ft_split(line, ',');
-	if (!f)
+	split = ft_split(line, ',');
+	if (!split)
 		exit_str("Error");
-	while (f[i])
+	while (split[i])
 		i++;
 	if (i != 3)
 		exit_error("Error: Invalid color", line);
-	ft_free_ptr(f);
+	ft_free_ptr(split);
 }
