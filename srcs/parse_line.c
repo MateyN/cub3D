@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/20 14:31:46 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:50:54 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_color(char *line, int *i)
 	int		j;
 	char	*rgb;
 	int		color;
-	int		k;
+	int		idx;
 
 	if (line[*i] == ',')
 		(*i)++;
@@ -45,9 +45,9 @@ int	get_color(char *line, int *i)
 	while (line[*i] && line[*i] != ',' && line[*i] != ' ')
 		(*i)++;
 	rgb = ft_substr(line, j, *i - j);
-	k = -1;
-	while (rgb[++k])
-		if (!ft_isdigit(rgb[k]))
+	idx = -1;
+	while (rgb[++idx])
+		if (!ft_isdigit(rgb[idx]))
 			exit_error("Error: color", line);
 	if (!rgb[0])
 		(free(rgb), exit_error("Error: color", line));
@@ -94,10 +94,11 @@ void	texture_parsing(t_game *game, char *line, int element, int i)
 		game->map->so = path;
 	else if (element == WE && !game->map->we)
 		game->map->we = path;
-	else if (element == EA && !game->map->ea)
-		game->map->ea = path;
+	//else if (element == EA && !game->map->ea)
+		//game->map->ea = path;
 	else
-		exit_error("Error: duplicate texture", line);
+		game->map->ea = path;
+	//	exit_error("Error: duplicate texture", line);
 	free(line);
 }
 

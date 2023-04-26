@@ -81,7 +81,7 @@ If it hits a wall, it sets the wall_hit flag to 1 and store the
 intersection point (v->wall_interX, v->wall_interY).
 @params 
 *game a pointer to the game struct.
-*h The intersection structure for the vertical ray.
+*v The intersection structure for the vertical ray.
 *i The index of the current ray in the rays array.
 @return void.
 */ 

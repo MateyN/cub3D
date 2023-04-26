@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:04 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/20 10:32:54 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:13:00 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	check_map(t_game *game)
 {
 	if (!game->map->no || !game->map->so || !game->map->we || !game->map->ea)
-		exit_str("Error: Texture is missing");
+		set_map(game);
 	else if (game->map->floor == -1 || game->map->ceiling == -1)
-		exit_str("Error: Color is missing");
+		exit_str("Error: Color missing");
 	else if (!game->map->map[0])
-		exit_str("Error: Map is missing");
+		exit_str("Error: Map missing");
 	else if (game->player->x == -1 || game->player->y == -1)
-		exit_str("Error: Player is missing");
+		exit_str("Error: Player missing");
 }
 
 void	check_map_borders(char **map)

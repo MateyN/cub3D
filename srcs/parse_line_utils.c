@@ -6,15 +6,15 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:17 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/14 12:38:35 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:52:56 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	player_direction(char c)
+int	player_direction(char dir)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if (dir == 'N' || dir == 'S' || dir == 'W' || dir == 'E')
 		return (1);
 	return (0);
 }
@@ -24,7 +24,7 @@ int	set_map(t_game *game)
     if (game->map->floor == -1 || game->map->ceiling == -1
             || game->map->no == NULL || game->map->so == NULL
             || game->map->we == NULL || game->map->ea == NULL)
-		exit_str("Error: Invalid file");
+		exit_str("Error: Texture missing");
 	return (0);
 }
 

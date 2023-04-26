@@ -1,7 +1,7 @@
-NO assets/stucco.xpm
-SO assets/crate2.xpm
-WE assets/warn.xpm
-EA assets/support.xpm
+NO assets/blue.xpm
+SO assets/red.xpm
+WE assets/green.xpm
+EA assets/green.xpm
 
 C 90, 90, 90
 F 152, 133, 88
