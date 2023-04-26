@@ -1,7 +1,7 @@
-NO assets/support.xpm
-SO assets/console.xpm
-WE assets/crate.xpm
-EA assets/crate2.xpm
+NO assets/red.xpm
+SO assets/red.xpm
+WE assets/blue.xpm
+EA assets/green.xpm
 
 C 135, 206, 235
 F 
