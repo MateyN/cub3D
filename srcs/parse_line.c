@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/26 13:50:54 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:32:35 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,10 @@ void	texture_parsing(t_game *game, char *line, int element, int i)
 		game->map->so = path;
 	else if (element == WE && !game->map->we)
 		game->map->we = path;
-	//else if (element == EA && !game->map->ea)
-		//game->map->ea = path;
-	else
+	else if (element == EA && !game->map->ea)
 		game->map->ea = path;
-	//	exit_error("Error: duplicate texture", line);
+	else
+		exit_error("Error: duplicate texture", line);
 	free(line);
 }
 

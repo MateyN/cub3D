@@ -1,10 +1,10 @@
-NO assets/red.xpm
+NO assets/metal.xpm
 SO assets/red.xpm
 WE assets/blue.xpm
 EA assets/green.xpm
 
-C 135, 206, 235
-F 
+C 
+F 0, 0, 0
 
 1111111111111111111111111111111111111111111111111
 10000S0000000000000000000000000000000000000000001
