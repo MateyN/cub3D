@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:56 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 10:39:43 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:36:36 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ int	is_map(char *line)
 {
 	int	i;
 
-	i = 0;
-	while (line[i])
+	i = -1;
+	while (line[++i])
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N'
 			&& line[i] != 'S' && line[i] != 'E'
 			&& line[i] != 'W' && line[i] != ' '
 			&& line[i] != '\n')
 			return (0);
-		i++;
 	}
 	return (1);
 }
@@ -41,10 +40,10 @@ int	check_args(char **args)
 
 	if (!args)
 		return (0);
-	i = 0;
-	while (args[i])
-		i++;
-	return (i + 1);
+	i = 1;
+	while (args[i++])
+		;
+	return (i);
 }
 
 char	**add_map(char **strs, char *arg)

@@ -25,11 +25,10 @@ INCS	= $(wildcard includes/*.h)
 all: $(NAME)
 
 $(NAME): ${OBJS}
-	@printf "$(YELLOW) - Compiling $(NAME)... $(RESET)\n"
+	@printf "$(YELLOW) - Compiling $(NAME) ... $(RESET)\n"
 	@$(MAKE) -s -C libft --silent
 	@$(CC) $(CFLAGS) $(MLX) ${LBFT} ${OBJS} main.c -o ${NAME}
-	@printf "$(GREEN) - $(NAME) is ready!\n$(RESET)"
-	@printf "$(GREEN) - HAVE FUN PLAYING $(NAME)!\n$(RESET)"
+	@printf "\033[1;32m - cub3D is ready!\033[0m\n"
 
 %.o: %.c $(INCS)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I includes/

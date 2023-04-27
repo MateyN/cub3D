@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:14:50 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/21 12:09:43 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:25:23 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void render_3d_view(t_game *game)
     t_wall	wall;
 
     i = 0;
-    while (i < MAPWIDTH)
+    while (++i < MAPWIDTH)
     {
         // Calculate the corrected distance to the wall using ray-casting and player angle
         wall.corr_dist = game->rays[i].dist * cos(game->rays[i].angle - game->player->angle);
@@ -56,7 +56,6 @@ void render_3d_view(t_game *game)
         render_3d_wall(game, i, wall);
         // Reset the distance to the projection plane to the original value for the next wall
         game->player->dist_proj_plane *= 2;
-		i++;
     }
 }
 
