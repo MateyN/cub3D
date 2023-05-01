@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:14:50 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/27 10:25:23 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/28 11:45:39 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void render_3d_view(t_game *game)
     int		i;
     t_wall	wall;
 
-    i = 0;
+    i = -1;
     while (++i < MAPWIDTH)
     {
         // Calculate the corrected distance to the wall using ray-casting and player angle

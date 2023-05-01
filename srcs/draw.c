@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:23:38 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/21 12:09:09 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/28 11:53:42 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void draw_wall(t_game *game, t_wall wall, t_img *wall_texture, int i)
 	char	*dst;
 	// Draw the ceiling up to the top of the wall
 	j = 0;
-	while (++j < wall.draw_y)
-		my_mlx_pixel_put(game->image, i, j, game->map->ceiling);
+	while (j < wall.draw_y)
+		my_mlx_pixel_put(game->image, i, j++, game->map->ceiling);
 		// Draw the wall itself
-	while (++j < wall.draw_x)
+	while (j < wall.draw_x)
 	{
 	// Calculate the height of the wall to draw, and the corresponding texture position
 		wall.draw = j + (wall.wall_height / 2) - (MAPHEIGHT / 2); // Putting the wall vertically on the screen
@@ -39,11 +39,11 @@ void draw_wall(t_game *game, t_wall wall, t_img *wall_texture, int i)
 		// Calculate the position in memory of the texture pixel to draw
 		dst = wall_texture->addr + wall.texture_y * wall_texture->line_length
 			+ wall.texture_x * (wall_texture->bits_per_pixel / 8);
-		my_mlx_pixel_put(game->image, i, j, *(unsigned int *)dst);
+		my_mlx_pixel_put(game->image, i, j++, *(unsigned int *)dst);
 	}
 	// Draw the floor below the wall
-	while (++j < MAPHEIGHT)
-		my_mlx_pixel_put(game->image, i, j, game->map->floor);
+	while (j < MAPHEIGHT)
+		my_mlx_pixel_put(game->image, i, j++, game->map->floor);
 }
 
 /**
@@ -59,8 +59,8 @@ void draw_player(t_game *game, char **map, int y, int x)
     if (game->player->x != -1 || game->player->y != -1)
         exit_str("Duplicate player");
     // Calculate player's x and y position on the game screen based on the map
-    game->player->x = (x * TILES) + 16;
-    game->player->y = (y * TILES) + 16;
+    game->player->x = (x * TILES) + 14;
+    game->player->y = (y * TILES) + 14;
     // Set the player's angle based on the direction it's facing
     if (map[y][x] == 'N')
         game->player->angle = 270 * (PI / 180); // converting radians into degrees to indicate which way the player is facing

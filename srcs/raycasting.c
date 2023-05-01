@@ -6,13 +6,13 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:03 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/27 10:23:51 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/01 12:04:36 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_intersection	*draw_horz(t_game *game, double angle, int i)
+t_intersection	*draw_horz(t_game *game, float angle, int i)
 {
 	t_intersection	*h;
 
@@ -39,7 +39,7 @@ t_intersection	*draw_horz(t_game *game, double angle, int i)
 	return (h);
 }
 
-t_intersection	*draw_vert(t_game *game, double angle, int i)
+t_intersection	*draw_vert(t_game *game, float angle, int i)
 {
 	t_intersection	*v;
 
@@ -72,7 +72,7 @@ void	fill_ray(t_ray *ray, t_intersection *dir, int boolean)
 	ray->dist = dir->hit_dist;
 }
 
-void	draw_ray(t_game *game, double angle, int i)
+void	draw_ray(t_game *game, float angle, int i)
 {
 	t_intersection	*h;
 	t_intersection	*v;
@@ -114,7 +114,7 @@ void	draw_rays(t_game *game)
 	{
 		//printf("Counter is at %d\n", i);
 		angle = game->player->angle
-			+ tan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
+			+ atan((i - MAPWIDTH / 2) / game->player->dist_proj_plane);
 		draw_ray(game, angle, i);
 		i++;
 	}
