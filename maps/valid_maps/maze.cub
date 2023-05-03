@@ -1,7 +1,7 @@
-NO assets/kr1.xpm
-SO assets/kr2.xpm
-WE assets/kr3.xpm
-EA assets/kr4.xpm
+NO assets/maze.xpm
+SO assets/mazegrey.xpm
+WE assets/redmaze.xpm
+EA assets/mazecool.xpm
 
 C 71, 71, 71
 F 46, 46, 46
