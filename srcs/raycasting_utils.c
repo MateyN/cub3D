@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:34:13 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/01 12:23:27 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:09:18 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 @return The calculated distance between the two points
 */
 
-int	calc_wall_dist(double x1, double y1, double x2, double y2)
+double	calc_wall_dist(double x1, double y1, double x2, double y2)
 {
 	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
@@ -32,7 +32,7 @@ int	calc_wall_dist(double x1, double y1, double x2, double y2)
 @return The calculated distance to the wall if it was hit, otherwise the maximum integer value
 */
 
-int	get_dist_to_wall(t_game *game, t_intersection *inter)
+double	get_dist_to_wall(t_game *game, t_intersection *inter)
 {
 	if (inter->wall_hit)
 		return (calc_wall_dist(game->player->x, game->player->y,
