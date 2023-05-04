@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:12:46 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/21 10:10:42 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:49:19 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <string.h>
 # include "get_next_line.h"
 
-# define FOV 1.04719755
+# define FOV 60 * (M_PI / 180)
 # define PI 3.14159265358979323846264338327950288
 # define ANGLE_90 (PI / 2)
 # define ANGLE_270 (3 * PI / 2)
@@ -36,8 +36,8 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ESC 53
-# define MAPHEIGHT 800
-# define MAPWIDTH 600
+# define MAPHEIGHT 760
+# define MAPWIDTH 1280
 # define TILES 32
 
 enum e_ELEMENTS
@@ -160,6 +160,7 @@ void	color_parsing(t_game *game, char *line, int token, int i);
 int		player_direction(char c);
 void	check_length(char *line);
 int		set_map(t_game *game);
+void	check_duplicate_color(t_game *game, int element, char *line);
 
 // --------------------------  MAP PARSING  ------------------------- //
 
@@ -201,15 +202,15 @@ void	render(t_game *game);
 // ---------------------------  RAYCASTING  --------------------------- //
 
 void			draw_rays(t_game *game);
-void			draw_ray(t_game *game, double angle, int i);
+void			draw_ray(t_game *game, float angle, int i);
 void			fill_ray(t_ray *ray, t_intersection *dir, int boolean);
-t_intersection	*draw_vert(t_game *game, double angle, int i);
-t_intersection	*draw_horz(t_game *game, double angle, int i);
+t_intersection	*draw_vert(t_game *game, float angle, int i);
+t_intersection	*draw_horz(t_game *game, float angle, int i);
 
 // ---------------------------  RAYCASTING UTILS --------------------------- //
 
-int		get_dist_to_wall(t_game *game, t_intersection *dir);
-int		calc_wall_dist(double x1, double y1, double x2, double y2);
+double	get_dist_to_wall(t_game *game, t_intersection *dir);
+double	calc_wall_dist(double x1, double y1, double x2, double y2);
 void	dda_hor_step(t_game *game, t_intersection *h, int i);
 void	dda_vert_step(t_game *game, t_intersection *v, int i);
 
