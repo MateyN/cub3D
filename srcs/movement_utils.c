@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/03 12:12:01 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:08:02 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	can_move(t_map *map, double x, double y)
 */
 void	move_player(t_game *game)
 {
-	int	step_x;
-	int	step_y;
-	int	forward;
-    int	sideways;
+	double	step_x;
+	double	step_y;
+	double	forward;
+    double	sideways;
 
 	step_x = 0;
 	step_y = 0;
