@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:11 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/04 10:49:27 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:34:52 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	color_parsing(t_game *game, char *line, int element, int i)
 	else if (element == C && game->map->ceiling == -1)
 		game->map->ceiling = (color[0] << 16) + (color[1] << 8) + color[2];
 	else
-		check_duplicate_color(game, element, line);
+		exit_error("Error: duplicate color", line);
 	free(line);
 }
 
