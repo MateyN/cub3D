@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:17 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/26 15:38:02 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:49:12 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,21 @@ void	check_length(char *line)
 	if (i != 3)
 		exit_error("Error: Invalid color", line);
 	ft_free_ptr(split);
+}
+
+void	check_duplicate_color(t_game *game, int element, char *line)
+{
+    int	color[3];
+
+    color[0] = (game->map->floor >> 16) & 0xFF;
+    color[1] = (game->map->floor >> 8) & 0xFF;
+    color[2] = game->map->floor & 0xFF;
+    if (element == C)
+    {
+        color[0] = (game->map->ceiling >> 16) & 0xFF;
+        color[1] = (game->map->ceiling >> 8) & 0xFF;
+        color[2] = game->map->ceiling & 0xFF;
+    }
+    if (color[0] != -1 && color[1] != -1 && color[2] != -1)
+        exit_error("Error: duplicate color", line);
 }
