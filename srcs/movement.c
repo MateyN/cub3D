@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:00 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/13 10:43:04 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:48:02 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ int	ft_press_key(int keycode, t_game *game)
 	else if (keycode == KEY_S)
 		game->player->move = -1;
 	else if (keycode == KEY_D)
+	{
 		game->player->side = +1;
+		game->player->side_pressed = 1;
+	}
 	else if (keycode == KEY_A)
+	{
 		game->player->side = -1;
+		game->player->side_pressed = 1;
+	}
 	else if (keycode == RIGHT)
 		game->player->rotdir = +1;
 	else if (keycode == LEFT)
@@ -38,9 +44,15 @@ int	ft_release_key(int keycode, t_game *game)
 	else if (keycode == KEY_S)
 		game->player->move = 0;
 	else if (keycode == KEY_D)
+	{
 		game->player->side = 0;
+		game->player->side_pressed = 0;
+	}
 	else if (keycode == KEY_A)
+	{
 		game->player->side = 0;
+		game->player->side_pressed = 0;
+	}
 	else if (keycode == RIGHT)
 		game->player->rotdir = 0;
 	else if (keycode == LEFT)

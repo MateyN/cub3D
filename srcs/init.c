@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:32 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/04 11:34:41 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:46:53 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	init_player(t_game *game)
 	game->player->move = 0;
 	game->player->rotdir = 0;
 	game->player->angle = 0;
-	game->player->rotspeed = 1.5 * (PI / 180);
+	game->player->rotspeed = 0.05;
 	game->player->movespeed = 5;
+	game->player->side_pressed = 0;
 	game->player->dist_proj_plane = (MAPWIDTH / 2) / tan(FOV / 2);
 }
 

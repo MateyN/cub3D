@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/04 11:08:02 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:49:48 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ void	move_player(t_game *game)
 	game->player->angle += game->player->rotdir * game->player->rotspeed;
 	// Calculate the movement based on the player's angle and movement direction
 	forward = game->player->move * game->player->movespeed;
-    sideways = game->player->side * (game->player->movespeed - 2);
+    sideways = game->player->side * 2.5;
 	step_x = step_x + (cos(game->player->angle) * forward);
 	step_x = step_x + (cos(game->player->angle + PI / 2) * sideways);
     step_y = step_y + (sin(game->player->angle) * forward);
     step_y = step_y + (sin(game->player->angle + PI / 2) * sideways);
-	step_x *= 3; // movespeed
-	step_y *= 3; // movespeed
+	step_x *= 5; // movespeed
+	step_y *= 5; // movespeed
 	if (can_move(game->map, game->player->x + step_x, game->player->y))
-		game->player->x += step_x / 3; // adjust movespeed
+		game->player->x += step_x / 5; // adjust movespeed
 	if (can_move(game->map, game->player->x, game->player->y + step_y))
-		game->player->y += step_y / 3; // adjust movespeed
+		game->player->y += step_y / 5; // adjust movespeed
 }

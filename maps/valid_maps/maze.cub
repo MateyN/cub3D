@@ -1,9 +1,9 @@
-NO assets/maze.xpm
-SO assets/mazegrey.xpm
-WE assets/redmaze.xpm
-EA assets/mazecool.xpm
+NO assets/e6/crate.xpm
+SO assets/e6/crate2.xpm
+WE assets/e6/console.xpm
+EA assets/e6/support.xpm
 
-C 71, 71, 71
+C 0, 0, 0
 F 46, 46, 46
 
 1111111111111111111111111111111111111111111111111

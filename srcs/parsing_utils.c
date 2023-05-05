@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:56 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/27 11:36:36 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:35:38 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,30 @@ int	check_args(char **args)
 	return (i);
 }
 
-char	**add_map(char **strs, char *arg)
+char	**add_map(char **arr, char *arg)
 {
-	char	**args;
-	int		wlen;
+	char	**new_arr;
+	int		arr_length;
 	int		i;
 
-	if (!strs[0] || !strs)
+	if (arr[0] == NULL || arr == NULL)
 	{
-		args = (char **)malloc(sizeof(char *) * 2);
-		args[0] = ft_strdup(arg);
-		args[1] = NULL;
-		ft_free_ptr(strs);
-		return (args);
+		new_arr = (char **)malloc(sizeof(char *) * 2);
+		new_arr[0] = ft_strdup(arg);
+		new_arr[1] = NULL;
+		ft_free_ptr(arr);
+		return (new_arr);
 	}
-	wlen = check_args(strs);
-	args = (char **)malloc(sizeof(char *) * (wlen + 1));
-	i = -1;
-	while (strs[++i])
-		args[i] = ft_strdup(strs[i]);
-	args[i] = ft_strdup(arg);
-	args[i + 1] = NULL;
-	ft_free_ptr(strs);
-	return (args);
+	arr_length = check_args(arr);
+	new_arr = (char **)malloc(sizeof(char *) * (arr_length + 1));
+	i = 0;
+	while (arr[i] != NULL)
+	{
+    	new_arr[i] = ft_strdup(arr[i]);
+    	i++;
+	}
+	new_arr[i] = ft_strdup(arg);
+	new_arr[i + 1] = NULL;
+	ft_free_ptr(arr);
+	return (new_arr);
 }

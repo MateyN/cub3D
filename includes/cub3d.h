@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:12:46 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/04 12:35:04 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:46:32 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_player
 	int		rotdir;
 	float	rotspeed;
 	float	dist_proj_plane;
+	int		side_pressed;
 }	t_player;
 
 typedef struct s_wall
@@ -160,6 +161,7 @@ void	color_parsing(t_game *game, char *line, int token, int i);
 int		player_direction(char c);
 void	check_length(char *line);
 int		set_map(t_game *game);
+void	check_duplicate_color(t_game *game, int element, char *line);
 
 // --------------------------  MAP PARSING  ------------------------- //
 
