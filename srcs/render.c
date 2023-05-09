@@ -6,7 +6,7 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:14:50 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/05 10:25:15 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/09 11:33:01 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ void render_3d_view(t_game *game)
     i = -1;
     while (++i < MAPWIDTH)
     {
-        // Calculate the corrected distance to the wall using ray-casting and player angle
-        wall.corr_dist = game->rays[i].dist * cos(game->rays[i].angle - game->player->angle);
-        // Calculate the distance to the projection plane based on FOV and screen width
+        // the correct distance to the wall
+        wall.corr_dist = game->rays[i].dist * cos(game->rays[i].angle - game->player->angle); // to align x and y axes
+        // the distance from the player to the proj_plane
         game->player->dist_proj_plane = (MAPWIDTH / 2) / tan(FOV / 2);
-        // Calculate the height of the wall on the projection plane
+        // the height of the wall on the projection plane
         wall.wall_height = (TILES / wall.corr_dist) * game->player->dist_proj_plane;
-        // Calculate the Y-coordinate at which to start drawing the wall
+        // the vertical position where the wall should be drawn
         wall.draw_y = (MAPHEIGHT / 2) - (wall.wall_height / 2);	
         if (wall.draw_y < 0)
             wall.draw_y = 0;
-        // Calculate the X-coordinate at which to stop drawing the wall
+        // the bottom where the wall should be drawn
         wall.draw_x = (MAPHEIGHT / 2) + (wall.wall_height / 2);	
         if (wall.draw_x > MAPHEIGHT)
             wall.draw_x = MAPHEIGHT;
@@ -58,28 +58,33 @@ void render_3d_view(t_game *game)
         game->player->dist_proj_plane *= 2;
     }
 }
-
+/**
+ * calculates the texture coordinate for the point of intersection
+ * by scaling the x or y-coordinate of the intersection by the texture width,
+ * and then taking the remainder of that value when divided by the tile size
+ * to make sure that we draw the texture as many times as necessary to cover the whole wall
+*/
 void	render_3d_wall(t_game *game, int i, t_wall wall)
 {
 	t_img	*wall_texture;
 
-	if (game->rays[i].vert_hit)
+	if (game->rays[i].vert_hit) // if the rays hit vertical we select WE or EA
 	{
 		if (game->rays[i].ray_left)
 			wall_texture = game->sprites->we;
 		else
 			wall_texture = game->sprites->ea;
 		wall.texture_x = (int)(game->rays[i].hit_y
-				* wall_texture->width / TILES) % wall_texture->width;
+				* wall_texture->width / TILES) % wall_texture->width; // texture is repeated as many times as necessary to cover the entire length of the wall
 	}
 	else
 	{
-		if (game->rays[i].ray_up)
+		if (game->rays[i].ray_up) // if it hits horizontal, we select NO or SO
 			wall_texture = game->sprites->no;
 		else
 			wall_texture = game->sprites->so;
 		wall.texture_x = (int)(game->rays[i].hit_x
-				* wall_texture->width / TILES) % wall_texture->width;
+				* wall_texture->width / TILES) % wall_texture->width; // texture is repeated as many times as necessary to cover the entire length of the wall
 	}
 	draw_wall(game, wall, wall_texture, i);
 }
