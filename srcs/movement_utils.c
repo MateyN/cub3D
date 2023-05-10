@@ -6,18 +6,15 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:26 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/05 10:55:30 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/10 08:18:49 by mnikolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	get_width(char *line)
+int	get_width(t_map *map)
 {
-	int	lenght;
-
-	lenght = ft_strlen(line);
-	return (lenght * TILES);
+	return map->map_size_x * TILES;
 }
 
 /**
@@ -35,9 +32,9 @@ int	can_move(t_map *map, double x, double y)
 	x2 = floor(x / TILES);
 	y2 = floor(y / TILES);
 	// Check if the position is outside of the map boundaries
-	if (y < 0 || y > map->map_size_y)
+	if (y < 0 || y > map->map_size_y * TILES)
 		return (0);
-	if (x < 0 || x > get_width(map->map[y2]))
+	if (x < 0 || x > get_width(map))
 	//if (x < 0 || x > map->map_size_x)
 		return (0);
 	// Checks if its a wall or not
@@ -52,10 +49,10 @@ int	can_move(t_map *map, double x, double y)
 */
 void	move_player(t_game *game)
 {
-	double	step_x;
-	double	step_y;
-	double	forward;
-    double	sideways;
+	float	step_x;
+	float	step_y;
+	float	forward;
+    float	sideways;
 
 	step_x = 0;
 	step_y = 0;
@@ -68,10 +65,10 @@ void	move_player(t_game *game)
 	step_x = step_x + (cos(game->player->angle + PI / 2) * sideways);
     step_y = step_y + (sin(game->player->angle) * forward);
     step_y = step_y + (sin(game->player->angle + PI / 2) * sideways);
-	step_x *= 5; // movespeed
-	step_y *= 5; // movespeed
+	step_x *= 2; // movespeed
+	step_y *= 2; // movespeed
 	if (can_move(game->map, game->player->x + step_x, game->player->y))
-		game->player->x += step_x / 5; // adjust movespeed
+		game->player->x += step_x / 2; // adjust movespeed
 	if (can_move(game->map, game->player->x, game->player->y + step_y))
-		game->player->y += step_y / 5; // adjust movespeed
+		game->player->y += step_y / 2; // adjust movespeed
 }
