@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: krioja <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 10:10:46 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/04 12:45:27 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/13 10:10:46 by krioja            #+#    #+#             */
+/*   Updated: 2023/05/04 12:45:27 by krioja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../includes/cub3d.h"
 
 void	file_checker(char *str, char *extension)
 {

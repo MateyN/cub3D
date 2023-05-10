@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../includes/cub3d.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -28,63 +28,59 @@ height on the projection plane, and then renders them in a 3D perspective.
 @return void.
 */
 
-void render_3d_view(t_game *game)
+void	render_3d_view(t_game *game)
 {
-    int		i;
-    t_wall	wall;
+	int		i;
+	t_wall	wall;
 
-    i = -1;
-    while (++i < MAPWIDTH)
-    {
-        // the correct distance to the wall
-        wall.corr_dist = game->rays[i].dist * cos(game->rays[i].angle - game->player->angle); // to align x and y axes
-        // the distance from the player to the proj_plane
-        game->player->dist_proj_plane = (MAPWIDTH / 2) / tan(FOV / 2);
-        // the height of the wall on the projection plane
-        wall.wall_height = (TILES / wall.corr_dist) * game->player->dist_proj_plane;
-        // the vertical position where the wall should be drawn
-        wall.draw_y = (MAPHEIGHT / 2) - (wall.wall_height / 2);	
-        if (wall.draw_y < 0)
-            wall.draw_y = 0;
-        // the bottom where the wall should be drawn
-        wall.draw_x = (MAPHEIGHT / 2) + (wall.wall_height / 2);	
-        if (wall.draw_x > MAPHEIGHT)
-            wall.draw_x = MAPHEIGHT;
-        // Decrease the distance to the projection plane to make walls appear closer
-        game->player->dist_proj_plane /= 2;
-        // Render the wall in 3D perspective
-        render_3d_wall(game, i, wall);
-        // Reset the distance to the projection plane to the original value for the next wall
-        game->player->dist_proj_plane *= 2;
-    }
+	i = -1;
+	while (++i < MAPWIDTH)
+	{
+		wall.corr_dist = game->rays[i].dist * \
+			cos(game->rays[i].angle - game->player->angle);
+		game->player->dist_proj_plane = (MAPWIDTH / 2) / tan(FOV / 2);
+		wall.wall_height = (TILES / wall.corr_dist) * \
+			game->player->dist_proj_plane;
+		wall.draw_y = (MAPHEIGHT / 2) - (wall.wall_height / 2);
+		if (wall.draw_y < 0)
+			wall.draw_y = 0;
+		wall.draw_x = (MAPHEIGHT / 2) + (wall.wall_height / 2);
+		if (wall.draw_x > MAPHEIGHT)
+			wall.draw_x = MAPHEIGHT;
+		game->player->dist_proj_plane /= 2;
+		render_3d_wall(game, i, wall);
+		game->player->dist_proj_plane *= 2;
+	}
 }
+
 /**
  * calculates the texture coordinate for the point of intersection
  * by scaling the x or y-coordinate of the intersection by the texture width,
  * and then taking the remainder of that value when divided by the tile size
- * to make sure that we draw the texture as many times as necessary to cover the whole wall
+ * to make sure that we draw the texture 
+ * as many times as necessary to cover the whole wall
 */
 void	render_3d_wall(t_game *game, int i, t_wall wall)
 {
 	t_img	*wall_texture;
 
-	if (game->rays[i].vert_hit) // if the rays hit vertical we select WE or EA
+	if (game->rays[i].vert_hit)
 	{
 		if (game->rays[i].ray_left)
 			wall_texture = game->sprites->we;
 		else
 			wall_texture = game->sprites->ea;
 		wall.texture_x = (int)(game->rays[i].hit_y
-				* wall_texture->width / TILES) % wall_texture->width; // texture is repeated as many times as necessary to cover the entire length of the wall
+				* wall_texture->width / TILES) % wall_texture->width;
 	}
 	else
 	{
-		if (game->rays[i].ray_up) // if it hits horizontal, we select NO or SO
+		if (game->rays[i].ray_up)
 			wall_texture = game->sprites->no;
 		else
 			wall_texture = game->sprites->so;
 		wall.texture_x = (int)(game->rays[i].hit_x
-				* wall_texture->width / TILES) % wall_texture->width; // texture is repeated as many times as necessary to cover the entire length of the wall
+				* wall_texture->width / TILES) % wall_texture->width;
 	}
 	draw_wall(game, wall, wall_texture, i);
 }

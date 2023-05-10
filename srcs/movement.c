@@ -6,11 +6,11 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:10:00 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/05 10:48:02 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:48:02 by krioja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../includes/cub3d.h"
 
 int	ft_press_key(int keycode, t_game *game)
 {

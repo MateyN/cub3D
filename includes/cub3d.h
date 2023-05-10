@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <mlx.h>
+# include "../mlx/mlx.h"
 # include <math.h>
 # include "../libft/libft.h"
 # include <errno.h>
@@ -25,10 +25,10 @@
 # include <string.h>
 # include "get_next_line.h"
 
-# define FOV 60 * (M_PI / 180)
+# define FOV 1.04719755
 # define PI 3.14159265358979323846264338327950288
-# define ANGLE_90 (PI / 2)
-# define ANGLE_270 (3 * PI / 2)
+# define ANGLE_90 1.5708
+# define ANGLE_270 4.7124
 # define RIGHT 124
 # define LEFT 123
 # define KEY_W 13
@@ -36,8 +36,8 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ESC 53
-# define MAPHEIGHT 760
-# define MAPWIDTH 1280
+# define MAPHEIGHT 860
+# define MAPWIDTH 1420
 # define TILES 32
 
 enum e_ELEMENTS
@@ -68,12 +68,13 @@ typedef struct s_player
 	float	y;
 	float	angle;
 	int		move;
-    int     side;
+	int		side;
 	float	movespeed;
 	int		rotdir;
 	float	rotspeed;
 	float	dist_proj_plane;
 	int		side_pressed;
+	float	dir;
 }	t_player;
 
 typedef struct s_wall
@@ -89,14 +90,15 @@ typedef struct s_wall
 
 typedef struct s_intersection
 {
-	float	deltaX;
-	float	deltaY;
-	float	wall_interX;
-	float	wall_interY;
-	float	currentX;
-	float	currentY;
+	float	delta_x;
+	float	delta_y;
+	float	wall_inter_x;
+	float	wall_inter_y;
+	float	current_x;
+	float	current_y;
 	float	hit_dist;
 	int		wall_hit;
+	float	ray_angle;
 }	t_intersection;
 
 typedef struct s_ray
@@ -148,57 +150,57 @@ typedef struct s_game
 
 // ----------------------------  PARSING  ---------------------------- //
 
-void	parsing(t_game *game, char *str);
-void	file_checker(char *str, char *extension);
-void	file_parsing(t_game *game, int fd);
-void	texture_parsing(t_game *game, char *line, int token, int i);
-void	map_parsing(t_game *game, char *line, int fd);
+void			parsing(t_game *game, char *str);
+void			file_checker(char *str, char *extension);
+void			file_parsing(t_game *game, int fd);
+void			texture_parsing(t_game *game, char *line, int token, int i);
+void			map_parsing(t_game *game, char *line, int fd);
 
 // --------------------------  LINE PARSING  ------------------------- //
 
-int		line_parsing(t_game *game, char *line);
-void	color_parsing(t_game *game, char *line, int token, int i);
-int		player_direction(char c);
-void	check_length(char *line);
-int		set_map(t_game *game);
-void	check_duplicate_color(t_game *game, int element, char *line);
+int				line_parsing(t_game *game, char *line);
+void			color_parsing(t_game *game, char *line, int token, int i);
+int				player_direction(char c);
+void			check_length(char *line);
+int				set_map(t_game *game);
+void			check_duplicate_color(t_game *game, int element, char *line);
 
 // --------------------------  MAP PARSING  ------------------------- //
 
-void	ft_isspaces(char *s, int *i);
-int		is_map(char *line);
-int		check_name(char *name);
-int		check_args(char **args);
-char	**add_map(char **strs, char *arg);
-void	check_map(t_game *game);
-void	check_map_borders(char **map);
-void	check_map_content(t_game *game, char **map);
+void			ft_isspaces(char *s, int *i);
+int				is_map(char *line);
+int				check_name(char *name);
+int				check_args(char **args);
+char			**add_map(char **strs, char *arg);
+void			check_map(t_game *game);
+void			check_map_borders(char **map);
+void			check_map_content(t_game *game, char **map);
 
 // --------------------------  INITIALIZING  ------------------------- //
-void	init_map(t_game *game);
-void	init_game(t_game *game);
-void	init_player(t_game *game);
-void	init_window(t_game *game);
-void	init_textures(t_game *game);
+void			init_map(t_game *game);
+void			init_game(t_game *game);
+void			init_player(t_game *game);
+void			init_window(t_game *game);
+void			init_textures(t_game *game);
 
 // -----------------------------  FREE  ----------------------------- //
 
-void	ft_free_ptr(char **ptr);
+void			ft_free_ptr(char **ptr);
 
 // -----------------------------  GAME  ----------------------------- //
 
-void	ft_game(t_game *game);
-void	set_hooks(t_game *game);
-void	set_game(t_game *game);
-void	update(t_game *game);
-int		loop_hook(t_game *game);
+void			ft_game(t_game *game);
+void			set_hooks(t_game *game);
+void			set_game(t_game *game);
+void			update(t_game *game);
+int				loop_hook(t_game *game);
 
 // ---------------------------  RENDER  --------------------------- //
 
-void	render_3d_wall(t_game *game, int i, t_wall wall);
-void	render_3d_view(t_game *game);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	render(t_game *game);
+void			render_3d_wall(t_game *game, int i, t_wall wall);
+void			render_3d_view(t_game *game);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			render(t_game *game);
 
 // ---------------------------  RAYCASTING  --------------------------- //
 
@@ -210,34 +212,34 @@ t_intersection	*draw_horz(t_game *game, float angle, int i);
 
 // ---------------------------  RAYCASTING UTILS --------------------------- //
 
-double	get_dist_to_wall(t_game *game, t_intersection *dir);
-double	calc_wall_dist(double x1, double y1, double x2, double y2);
-void	dda_hor_step(t_game *game, t_intersection *h, int i);
-void	dda_vert_step(t_game *game, t_intersection *v, int i);
+float			get_dist_to_wall(t_game *game, t_intersection *dir);
+float			calc_wall_dist(float x1, float y1, float x2, float y2);
+void			dda_hor_step(t_game *game, t_intersection *h, int i);
+void			dda_vert_step(t_game *game, t_intersection *v, int i);
 
 // -----------------------------  MOVEMENT ------------------------------ //
 
-int		ft_press_key(int keycode, t_game *game);
-int		ft_release_key(int keycode, t_game *game);
-int		ft_close(int keycode, t_game *game);
+int				ft_press_key(int keycode, t_game *game);
+int				ft_release_key(int keycode, t_game *game);
+int				ft_close(int keycode, t_game *game);
 
 // -----------------------------  DRAW ------------------------------ //
 
-t_img	*draw_sprite(void *mlx, char *path);
-void	draw_wall(t_game *game, t_wall wall, t_img *texture, int i);
-void	draw_player(t_game *game, char **map, int y, int x);
+t_img			*draw_sprite(void *mlx, char *path);
+void			draw_wall(t_game *game, t_wall wall, t_img *texture, int i);
+void			draw_player(t_game *game, char **map, int y, int x);
 
-// -----------------------------  MOVEMENT UTILS ------------------------------ //
+// -----------------------------  MOVEMENT UTILS ---------------------- //
 
-void	move_player(t_game *game);
-int		can_move(t_map *map, double x, double y);
-int		get_width(char *line);
+void			move_player(t_game *game);
+int				can_move(t_map *map, double x, double y);
+int				get_width(char *line);
 
 // -----------------------------  EXITS  ----------------------------- //
 
-void	exit_str(char *str);
-void	exit_success(char *str);
-void	exit_error(char *str, char *err);
-void	exit_strerr(char *str, int err);
+void			exit_str(char *str);
+void			exit_success(char *str);
+void			exit_error(char *str, char *err);
+void			exit_strerr(char *str, int err);
 
 #endif

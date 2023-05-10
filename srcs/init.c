@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../includes/cub3d.h"
 
 void	init_window(t_game *game)
 {
@@ -42,7 +42,7 @@ void	init_player(t_game *game)
 {
 	game->player->x = -1;
 	game->player->y = -1;
-    game->player->side = 0;
+	game->player->side = 0;
 	game->player->move = 0;
 	game->player->rotdir = 0;
 	game->player->angle = 0;

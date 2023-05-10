@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../includes/cub3d.h"
+
 /**
 @brief Calculates the distance between two points (x1,y1) and (x2,y2)
 @param x1: X-coordinate of first point
@@ -20,26 +21,27 @@
 @return The calculated distance between the two points
 */
 
-double	calc_wall_dist(double x1, double y1, double x2, double y2)
+float	calc_wall_dist(float x1, float y1, float x2, float y2)
 {
 	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 
 /**
-@brief Calculates the distance from the player's position to the intersection point with a wall
+@brief calcul the distance from the player's pos to the inter point with a wall
 @param game: A pointer to the game struct
 @param inter: A pointer to the intersection struct
-@return The calculated distance to the wall if it was hit, otherwise the maximum integer value
+@return The calculated distance to the wall if it was hit, if not max int
 */
 
-double	get_dist_to_wall(t_game *game, t_intersection *inter)
+float	get_dist_to_wall(t_game *game, t_intersection *inter)
 {
 	if (inter->wall_hit)
 		return (calc_wall_dist(game->player->x, game->player->y,
-				inter->wall_interX, inter->wall_interY));
+				inter->wall_inter_x, inter->wall_inter_y));
 	else
 		return (INT_MAX);
 }
+
 /**
 @brief implements the DDA algorithm for horizontal lines.
 It starts from the current position (h->currentX, h->currentY)
@@ -53,23 +55,23 @@ intersection point (h->wall_interX, h->wall_interY).
 */
 void	dda_hor_step(t_game *game, t_intersection *h, int i)
 {
-	while (h->currentX >= 0
-		&& h->currentX <= game->map->map_size_x
-		&& h->currentY >= 0
-		&& h->currentY <= game->map->map_size_y)
+	while (h->current_x >= 0
+		&& h->current_x <= game->map->map_size_x
+		&& h->current_y >= 0
+		&& h->current_y <= game->map->map_size_y)
 	{
-		if (!can_move(game->map, h->currentX,
-				h->currentY - (game->rays[i].ray_up == 1)))
+		if (!can_move(game->map, h->current_x,
+				h->current_y - (game->rays[i].ray_up == 1)))
 		{
 			h->wall_hit = 1;
-			h->wall_interX = h->currentX;
-			h->wall_interY = h->currentY;
+			h->wall_inter_x = h->current_x;
+			h->wall_inter_y = h->current_y;
 			break ;
 		}
 		else
 		{
-			h->currentX += h->deltaX;
-			h->currentY += h->deltaY;
+			h->current_x += h->delta_x;
+			h->current_y += h->delta_y;
 		}
 	}
 }
@@ -84,28 +86,28 @@ intersection point (v->wall_interX, v->wall_interY).
 *v The intersection structure for the vertical ray.
 *i The index of the current ray in the rays array.
 @return void.
-*/ 
+*/
 
 void	dda_vert_step(t_game *game, t_intersection *v, int i)
 {
-	while (v->currentX >= 0
-		&& v->currentX <= game->map->map_size_x
-		&& v->currentY >= 0
-		&& v->currentY <= game->map->map_size_y)
+	while (v->current_x >= 0
+		&& v->current_x <= game->map->map_size_x
+		&& v->current_y >= 0
+		&& v->current_y <= game->map->map_size_y)
 	{
 		if (!can_move(game->map,
-				v->currentX - (game->rays[i].ray_left == 1),
-				v->currentY))
+				v->current_x - (game->rays[i].ray_left == 1),
+				v->current_y))
 		{
 			v->wall_hit = 1;
-			v->wall_interX = v->currentX;
-			v->wall_interY = v->currentY;
+			v->wall_inter_x = v->current_x;
+			v->wall_inter_y = v->current_y;
 			break ;
 		}
 		else
 		{
-			v->currentX += v->deltaX;
-			v->currentY += v->deltaY;
+			v->current_x += v->delta_x;
+			v->current_y += v->delta_y;
 		}
 	}
 }

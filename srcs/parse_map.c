@@ -6,11 +6,11 @@
 /*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:11:04 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/04/26 15:36:23 by mnikolov         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:36:23 by krioja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../includes/cub3d.h"
 
 void	check_map(t_game *game)
 {
@@ -62,14 +62,12 @@ void	check_map_content(t_game *game, char **map)
 				if (j > (int)ft_strlen(map[i + 1])
 					|| j > (int)ft_strlen(map[i - 1]))
 					exit_str("Error: Invalid map");
-					// Checks if any of the surrounding elements are not walls or empty spaces
 				if (map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
 					|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
 					|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
 					|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
 					exit_error("Error: Invalid map", map[i]);
 			}
-			// Checks if there is a player's starting position if so draw the player
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 				draw_player(game, map, i, j);

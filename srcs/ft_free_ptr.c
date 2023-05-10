@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
-
+#include "../includes/cub3d.h"
 /*
 void	free_game(t_game *game)
 {
@@ -40,7 +39,7 @@ void	free_game(t_game *game)
 
 void	ft_free_ptr(char **ptr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ptr[i])
@@ -48,5 +47,5 @@ void	ft_free_ptr(char **ptr)
 		free(ptr[i]);
 		i++;
 	}
-	free(ptr);  
+	free(ptr);
 }

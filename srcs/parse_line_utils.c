@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../includes/cub3d.h"
 
 int	player_direction(char dir)
 {
@@ -21,9 +21,9 @@ int	player_direction(char dir)
 
 int	set_map(t_game *game)
 {
-    if (game->map->floor == -1 || game->map->ceiling == -1
-            || game->map->no == NULL || game->map->so == NULL
-            || game->map->we == NULL || game->map->ea == NULL)
+	if (game->map->floor == -1 || game->map->ceiling == -1
+		|| game->map->no == NULL || game->map->so == NULL
+		|| game->map->we == NULL || game->map->ea == NULL)
 		exit_str("Error: Texture missing");
 	return (0);
 }
@@ -46,17 +46,17 @@ void	check_length(char *line)
 
 void	check_duplicate_color(t_game *game, int element, char *line)
 {
-    int	color[3];
+	int	color[3];
 
-    color[0] = (game->map->floor >> 16) & 0xFF;
-    color[1] = (game->map->floor >> 8) & 0xFF;
-    color[2] = game->map->floor & 0xFF;
-    if (element == C)
-    {
-        color[0] = (game->map->ceiling >> 16) & 0xFF;
-        color[1] = (game->map->ceiling >> 8) & 0xFF;
-        color[2] = game->map->ceiling & 0xFF;
-    }
-    if (color[0] != -1 && color[1] != -1 && color[2] != -1)
-        exit_error("Error: duplicate color", line);
+	color[0] = (game->map->floor >> 16) & 0xFF;
+	color[1] = (game->map->floor >> 8) & 0xFF;
+	color[2] = game->map->floor & 0xFF;
+	if (element == C)
+	{
+		color[0] = (game->map->ceiling >> 16) & 0xFF;
+		color[1] = (game->map->ceiling >> 8) & 0xFF;
+		color[2] = game->map->ceiling & 0xFF;
+	}
+	if (color[0] != -1 && color[1] != -1 && color[2] != -1)
+		exit_error("Error: duplicate color", line);
 }

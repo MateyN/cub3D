@@ -1,9 +1,9 @@
-NO assets/green.xpm
-SO assets/blue.xpm
-WE assets/red.xpm
-EA assets/green.xpm
+NO assets/mazecool.xpm
+SO assets/redmaze.xpm
+WE assets/mazeblue.xpm
+EA assets/maze.xpm
 
-C 0, 0, 0
+C 244, 213,132
 F 0, 0, 0
 
 1111111111111111111111111111111111111111111111111

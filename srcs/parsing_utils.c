@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnikolov <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: krioja   <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 10:10:56 by mnikolov          #+#    #+#             */
-/*   Updated: 2023/05/05 10:35:38 by mnikolov         ###   ########.fr       */
+/*   Created: 2023/04/13 10:10:56 by krioja            #+#    #+#             */
+/*   Updated: 2023/05/05 10:35:38 by krioja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../includes/cub3d.h"
 
 void	ft_isspaces(char *s, int *i)
 {
@@ -65,8 +65,8 @@ char	**add_map(char **arr, char *arg)
 	i = 0;
 	while (arr[i] != NULL)
 	{
-    	new_arr[i] = ft_strdup(arr[i]);
-    	i++;
+		new_arr[i] = ft_strdup(arr[i]);
+		i++;
 	}
 	new_arr[i] = ft_strdup(arg);
 	new_arr[i + 1] = NULL;
