@@ -52,5 +52,5 @@ $ ./cub3d maps/valid/egypt.cub
 ## Example
 
 <p align="center">
-<img src="./example.gif" alt="animated" />
+<img src="example.mov" alt="animated" />
 </p>
