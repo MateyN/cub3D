@@ -51,4 +51,6 @@ $ ./cub3d maps/valid/egypt.cub
 
 ## Example
 
-![capture](https://github.com/MateyN/cub3d/blob/master/cub3d/example.mov)
+<p align="center">
+<img src="./example.gif" alt="animated" />
+</p>
